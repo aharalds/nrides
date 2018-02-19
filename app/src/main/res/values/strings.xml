@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">nyttApp</string>
+    <string name="send_btn">Senda</string>
+    <string name="dateTxt">Dagsetning</string>
+    <string name="seatsTxt">Laus sæti</string>
+    <string name="fromTxt">Frá..</string>
+    <string name="toTxt">Til..</string>
+    <string name="costTxt">Kostnaður</string>
+    <string name="timeTxt">HH:MM</string>
 </resources>

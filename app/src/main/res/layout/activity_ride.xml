@@ -7,81 +7,100 @@
     tools:context="is.hi.hopur16.nyttapp.rideActivity">
 
     <EditText
-        android:id="@+id/fraText"
+        android:id="@+id/fromTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:ems="10"
-        android:hint="Brottfarastaður"
+        android:hint="@string/fromTxt"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/tilText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/toTxt"
+        app:layout_constraintEnd_toEndOf="@+id/toTxt"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toTxt"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/tilText"
+        android:id="@+id/toTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Komustaður"
+        android:hint="@string/toTxt"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/seatsText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fraText" />
+        app:layout_constraintBottom_toTopOf="@+id/seatsTxt"
+        app:layout_constraintEnd_toEndOf="@+id/seatsTxt"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/seatsTxt"
+        app:layout_constraintTop_toBottomOf="@+id/fromTxt" />
 
     <EditText
-        android:id="@+id/seatsText"
+        android:id="@+id/seatsTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Fjöldi sæta"
+        android:hint="@string/seatsTxt"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/costText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilText"
+        app:layout_constraintBottom_toTopOf="@+id/costTxt"
+        app:layout_constraintEnd_toEndOf="@+id/costTxt"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/costTxt"
+        app:layout_constraintTop_toBottomOf="@+id/toTxt"
         app:layout_constraintVertical_bias="0.462" />
 
     <EditText
-        android:id="@+id/costText"
+        android:id="@+id/costTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Kostnaður"
+        android:hint="@string/costTxt"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/dateText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seatsText" />
+        app:layout_constraintBottom_toTopOf="@+id/dateTxt"
+        app:layout_constraintEnd_toEndOf="@+id/dateTxt"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/dateTxt"
+        app:layout_constraintTop_toBottomOf="@+id/seatsTxt" />
 
     <EditText
-        android:id="@+id/dateText"
+        android:id="@+id/dateTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Dagsetning"
+        android:hint="@string/dateTxt"
         android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/sendaBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/costText" />
+        app:layout_constraintBottom_toTopOf="@+id/timeTxt"
+        app:layout_constraintEnd_toEndOf="@+id/timeTxt"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/timeTxt"
+        app:layout_constraintTop_toBottomOf="@+id/costTxt" />
 
     <Button
         android:id="@+id/sendaBtn"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="88dp"
         android:layout_height="0dp"
-        android:text="Senda"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/send_btn"
+        app:layout_constraintBaseline_toBaselineOf="@+id/timeTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/timeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/timeTxt"
+        android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/sendaBtn"
+        app:layout_constraintEnd_toEndOf="@+id/sendaBtn"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/sendaBtn"
+        app:layout_constraintTop_toBottomOf="@+id/dateTxt" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
 
 </android.support.constraint.ConstraintLayout>
