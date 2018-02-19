@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="is.hi.hopur16.nyttapp.rideActivity">
+
+    <TextView
+        android:id="@+id/toTxt"
+        android:layout_width="239dp"
+        android:layout_height="28dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/seatsTxt"
+        app:layout_constraintStart_toStartOf="@+id/seatsTxt"
+        app:layout_constraintTop_toBottomOf="@+id/fromTxt" />
+
+    <TextView
+        android:id="@+id/costTxt"
+        android:layout_width="239dp"
+        android:layout_height="28dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/dateTxt"
+        app:layout_constraintStart_toStartOf="@+id/dateTxt"
+        app:layout_constraintTop_toBottomOf="@+id/seatsTxt" />
+
+    <TextView
+        android:id="@+id/fromTxt"
+        android:layout_width="239dp"
+        android:layout_height="28dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/toTxt"
+        app:layout_constraintStart_toStartOf="@+id/toTxt"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/seatsTxt"
+        android:layout_width="239dp"
+        android:layout_height="28dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/costTxt"
+        app:layout_constraintStart_toStartOf="@+id/costTxt"
+        app:layout_constraintTop_toBottomOf="@+id/toTxt" />
+
+    <TextView
+        android:id="@+id/dateTxt"
+        android:layout_width="239dp"
+        android:layout_height="28dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/timeTxt"
+        app:layout_constraintStart_toStartOf="@+id/timeTxt"
+        app:layout_constraintTop_toBottomOf="@+id/costTxt" />
+
+    <TextView
+        android:id="@+id/timeTxt"
+        android:layout_width="239dp"
+        android:layout_height="28dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTxt" />
+</android.support.constraint.ConstraintLayout>
