@@ -142,8 +142,6 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
                 JsonResponse = buffer.toString();
                 return JsonResponse;
 
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
