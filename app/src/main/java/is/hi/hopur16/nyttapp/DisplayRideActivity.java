@@ -43,7 +43,7 @@ public class DisplayRideActivity extends AppCompatActivity  {
 
         fromTxt.setText("Frá: " + ride.getRideFrom());
         toTxt.setText("Til: " + ride.getRideTo());
-        costTxt.setText("Kostnaður: " + String.valueOf(ride.getCost()));
+        costTxt.setText("Kostnaður: " + String.valueOf(ride.getCost()) + " kr.");
         seatsTxt.setText("Laus sæti: " + String.valueOf(ride.getSeatsAvailable()));
         dateTxt.setText(ride.getDate());
         timeTxt.setText(ride.getDepTime());
