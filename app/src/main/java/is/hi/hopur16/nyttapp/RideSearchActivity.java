@@ -23,6 +23,10 @@ public class RideSearchActivity extends AppCompatActivity {
     private EditText toText;
     private Button leitaBtn;
 
+    GetDataFromServer getData;
+    String myUrl;
+    String result;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,16 +36,6 @@ public class RideSearchActivity extends AppCompatActivity {
         fromText = (EditText) findViewById(R.id.fromText);
         toText = (EditText) findViewById(R.id.toText);
         leitaBtn = (Button) findViewById(R.id.leitaBtn);
-
-        /**
-         * ATH! Finna betur út hvernig ég kalla á þetta
-         */
-        String myUrl = "http://nicerideserver.herokuapp.com";
-        String result;
-        GetDataFromServer getData = new GetDataFromServer();
-        result = getData.doInBackground(myUrl);
-        result = getData.execute(myUrl).get();
-        System.out.println(result);
 
 
         /**
@@ -53,24 +47,25 @@ public class RideSearchActivity extends AppCompatActivity {
                 Intent intent = new Intent(RideSearchActivity.this, DisplaySearchActivity.class);
                 startActivity(intent);
 
+                // Sækjum gögnin
+                try {
+                    myUrl = "http://nicerideserver.herokuapp.com";
+                    getData = new GetDataFromServer();
+                    result = getData.execute(myUrl).get();
+                    System.out.println(result);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }
 
-
-    public class SomeOtherClass {
-        String myUrl = "http://nicerideserver.herokuapp.com";
-        String result;
-        GetDataFromServer getData = new GetDataFromServer();
-        result = getData.execute(myUrl).get();
-    }
-
-
-
     /**
      * Klasi sem sendir GET request á slóð og nær í gögn
      */
-    public class GetDataFromServer extends AsyncTask<String, String, String> {
+    class GetDataFromServer extends AsyncTask<String, Void, String> {
 
         public static final String REQUEST_METHOD = "GET";
         public static final int READ_TIMEOUT = 15000;
@@ -83,22 +78,18 @@ public class RideSearchActivity extends AppCompatActivity {
             String inputLine;
 
             try {
-                // Búum til URL-object með slóðinni
+                // Búum til tengingu og tengjumst slóðinni
                 URL myUrl = new URL(stringUrl);
-                // Búum til tengingu
                 HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
 
                 connection.setRequestMethod(REQUEST_METHOD);
                 connection.setReadTimeout(READ_TIMEOUT);
                 connection.setConnectTimeout(CONNECTION_TIMEOUT);
 
-                // Tengjumst nú slóðinni
                 connection.connect();
 
-                // Búum til InputStreamReader til að lesa inn gögnin
+                // Lesum inn gögnin
                 InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
-
-                // Búum til nýjan buffered reader og String Builder
                 BufferedReader reader = new BufferedReader(streamReader);
                 StringBuilder stringBuilder = new StringBuilder();
 
@@ -113,7 +104,6 @@ public class RideSearchActivity extends AppCompatActivity {
 
                 // Setjum niðurstöðurnar sem það sem við lásum inn og breytum í streng
                 result = stringBuilder.toString();
-                System.out.println(result);
             } catch (IOException e) {
                 e.printStackTrace();
                 result = null;
@@ -125,6 +115,8 @@ public class RideSearchActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            System.out.println(result);
         }
+
     }
 }

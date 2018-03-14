@@ -31,7 +31,7 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/fromText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread_inside"
@@ -51,4 +51,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toText"
         tools:text="Frá" />
+
+    <TextView
+        android:id="@+id/textTest"
+        android:layout_width="352dp"
+        android:layout_height="56dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="16dp" />
 </android.support.constraint.ConstraintLayout>
