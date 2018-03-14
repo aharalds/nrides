@@ -7,4 +7,6 @@
     <string name="toTxt">Til..</string>
     <string name="costTxt">Kostnaður</string>
     <string name="timeTxt">HH:MM</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

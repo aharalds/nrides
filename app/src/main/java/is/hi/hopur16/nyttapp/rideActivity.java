@@ -5,8 +5,11 @@ import is.hi.hopur16.nyttapp.Ride;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -44,6 +47,7 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride);
 
+
         dateTxt = (EditText) findViewById(R.id.dateTxt);
         dateTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -79,7 +83,6 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
         dateTxt.setText(currentDate);
 
     }
-
     public Ride createRide() {
         fromTxt = (EditText) findViewById(R.id.fromTxt);
         toTxt = (EditText) findViewById(R.id.toTxt);
