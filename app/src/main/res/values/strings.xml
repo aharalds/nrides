@@ -7,4 +7,6 @@
     <string name="toTxt">Til..</string>
     <string name="costTxt">Kostnaður</string>
     <string name="timeTxt">HH:MM</string>
+    <string name="add_ride_btn">Auglýsa</string>
+    <string name="search_btn">Leita</string>
 </resources>

@@ -18,6 +18,7 @@ import java.util.Calendar;
 
 public class DisplayRideActivity extends AppCompatActivity  {
 
+    Ride[] rides;
     TextView fromTxt;
     TextView toTxt;
     TextView costTxt;
@@ -34,6 +35,7 @@ public class DisplayRideActivity extends AppCompatActivity  {
         Intent i = getIntent();
         Ride ride = (Ride)i.getSerializableExtra("newRide");
 
+
         timeTxt = (TextView) findViewById(R.id.timeTxt);
         dateTxt = (TextView) findViewById(R.id.dateTxt);
         seatsTxt = (TextView) findViewById(R.id.seatsTxt);
@@ -41,12 +43,12 @@ public class DisplayRideActivity extends AppCompatActivity  {
         toTxt = (TextView) findViewById(R.id.toTxt);
         fromTxt = (TextView) findViewById(R.id.fromTxt);
 
-        fromTxt.setText("Frá: " + ride.getRideFrom());
-        toTxt.setText("Til: " + ride.getRideTo());
+        fromTxt.setText("Frá: " + ride.getRidefrom());
+        toTxt.setText("Til: " + ride.getRideto());
         costTxt.setText("Kostnaður: " + String.valueOf(ride.getCost()) + " kr.");
-        seatsTxt.setText("Laus sæti: " + String.valueOf(ride.getSeatsAvailable()));
+        seatsTxt.setText("Laus sæti: " + String.valueOf(ride.getSeatsavailable()));
         dateTxt.setText(ride.getDate());
-        timeTxt.setText(ride.getDepTime());
+        timeTxt.setText(ride.getDeptime());
 
 
     }

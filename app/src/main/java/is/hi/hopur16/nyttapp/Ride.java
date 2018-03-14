@@ -9,27 +9,27 @@ import java.util.Date;
 
 public class Ride implements Serializable {
 
-    public String rideFrom;
-    public String rideTo;
+    public String ridefrom;
+    public String rideto;
     public String date;
-    public String depTime;
-    public int seatsAvailable;
+    public String deptime;
+    public int seatsavailable;
     public int cost;
 
-    public String getRideFrom() {
-        return rideFrom;
+    public String getRidefrom() {
+        return ridefrom;
     }
 
-    public void setRideFrom(String rideFrom) {
-        this.rideFrom = rideFrom;
+    public void setRidefrom(String rideFrom) {
+        this.ridefrom = rideFrom;
     }
 
-    public String getRideTo() {
-        return rideTo;
+    public String getRideto() {
+        return rideto;
     }
 
     public void setRideTo(String rideTo) {
-        this.rideTo = rideTo;
+        this.rideto = rideTo;
     }
 
     public String getDate() {
@@ -40,20 +40,20 @@ public class Ride implements Serializable {
         this.date = date;
     }
 
-    public String getDepTime() {
-        return depTime;
+    public String getDeptime() {
+        return deptime;
     }
 
-    public void setDepTime(String depTime) {
-        this.depTime = depTime;
+    public void setDeptime(String depTime) {
+        this.deptime = depTime;
     }
 
-    public int getSeatsAvailable() {
-        return seatsAvailable;
+    public int getSeatsavailable() {
+        return seatsavailable;
     }
 
-    public void setSeatsAvailable(int seatsAvailable) {
-        this.seatsAvailable = seatsAvailable;
+    public void setSeatsavailable(int seatsAvailable) {
+        this.seatsavailable = seatsAvailable;
     }
 
     public int getCost() {
@@ -65,13 +65,12 @@ public class Ride implements Serializable {
     }
 
     public Ride(String rideFrom, String rideTo, String date, String depTime, int seatsAvailable, int cost) {
-        this.rideFrom = rideFrom;
-        this.rideTo = rideTo;
+        this.ridefrom = rideFrom;
+        this.rideto = rideTo;
         this.date = date;
-        this.depTime = depTime;
-        this.seatsAvailable = seatsAvailable;
+        this.deptime = depTime;
+        this.seatsavailable = seatsAvailable;
         this.cost = cost;
     }
-
 
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="is.hi.hopur16.nyttapp.searchActivity">
+
+    <EditText
+        android:id="@+id/fromTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/fromTxt"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/toTxt"
+        app:layout_constraintTop_toBottomOf="@+id/guideline"
+        tools:layout_editor_absoluteX="84dp" />
+
+    <EditText
+        android:id="@+id/toTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/toTxt"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/dateTxt"
+        app:layout_constraintTop_toBottomOf="@+id/fromTxt"
+        tools:layout_editor_absoluteX="85dp" />
+
+    <EditText
+        android:id="@+id/dateTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/dateTxt"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/sendaBtn"
+        app:layout_constraintTop_toBottomOf="@+id/toTxt"
+        tools:layout_editor_absoluteX="85dp" />
+
+    <Button
+        android:id="@+id/sendaBtn"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="88dp"
+        android:layout_height="0dp"
+        android:text="@string/send_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTxt" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+</android.support.constraint.ConstraintLayout>
