@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">nyttApp</string>
     <string name="send_btn">Senda</string>
@@ -9,4 +10,59 @@
     <string name="timeTxt">HH:MM</string>
     <string name="add_ride_btn">Auglýsa</string>
     <string name="search_btn">Leita</string>
+
+    <string-array name="places">
+        <item>Reykjav&#237;k</item>
+        <item>Keflavík</item>
+        <item>Njarðvík</item>
+        <item>Sandgerði</item>
+        <item>Vogar</item>
+        <item>Grindavík</item>
+        <item>Hveragerði</item>
+        <item>Mosfellsbær</item>
+        <item>Kjalanes</item>
+        <item>Selfoss</item>
+        <item>Þorlákshöfn</item>
+        <item>Stokkseyri</item>
+        <item>Hella</item>
+        <item>Hvolsvöllur</item>
+        <item>Vík</item>
+        <item>Kirkjubæjarklaustur</item>
+        <item>Höfn</item>
+        <item>Djúpivogur</item>
+        <item>Stöðvarfjörður</item>
+        <item>Breiðdalsvík</item>
+        <item>Fáskrúðsfjörður</item>
+        <item>Reyðarfjörður</item>
+        <item>Neskaupstaður</item>
+        <item>Eskifjörður</item>
+        <item>Egilsstaðir</item>
+        <item>Borgarfjörður Eystri</item>
+        <item>Seyðisfjörður</item>
+        <item>Vopnafjörður</item>
+        <item>Bakkafjörður</item>
+        <item>Húsavík</item>
+        <item>Kópasker</item>
+        <item>Dalvík</item>
+        <item>Sauðárkrókur</item>
+        <item>Hofsós</item>
+        <item>Hvammstangi</item>
+        <item>Ísafjörður</item>
+        <item>Dranganes</item>
+        <item>Hólmavík</item>
+        <item>Bolungarvík</item>
+        <item>Hólmavík</item>
+        <item>Reykhólar</item>
+        <item>Bíldudalur</item>
+        <item>Patreksfjörður</item>
+        <item>Tálknafjörður</item>
+        <item>Búðardalur</item>
+        <item>Ólafsvík</item>
+        <item>Borgarnes</item>
+        <item>Hvanneyri</item>
+        <item>Flúðir</item>
+        <item>Laugarvatn</item>
+        <item>Vestmannaeyjar</item>
+        <item>Akureyri</item>
+    </string-array>
 </resources>

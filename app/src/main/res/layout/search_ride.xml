@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="is.hi.hopur16.nyttapp.searchActivity">
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/fromTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toBottomOf="@+id/guideline"
         tools:layout_editor_absoluteX="84dp" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/toTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
