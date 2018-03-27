@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".rideActivity">
+        <activity android:name=".RideSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DisplayRideActivity"></activity>
+        <activity android:name=".DisplaySearchActivity"></activity>
+        <activity android:name=".rideActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

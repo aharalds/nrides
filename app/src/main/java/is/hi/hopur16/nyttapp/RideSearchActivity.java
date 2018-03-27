@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.os.AsyncTask;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import android.util.Log;
 
 /**
  * Created by Hörn on 7.3.2018.
@@ -19,9 +21,9 @@ import java.net.URL;
 
 public class RideSearchActivity extends AppCompatActivity {
 
-    private EditText fromText;
-    private EditText toText;
-    private Button leitaBtn;
+    EditText fromText;
+    EditText toText;
+    Button leitaBtn;
 
     GetDataFromServer getData;
     String myUrl;
@@ -45,6 +47,7 @@ public class RideSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RideSearchActivity.this, DisplaySearchActivity.class);
+                intent.putExtra("searchResult", result);
                 startActivity(intent);
 
                 // Sækjum gögnin
@@ -52,7 +55,7 @@ public class RideSearchActivity extends AppCompatActivity {
                     myUrl = "http://nicerideserver.herokuapp.com";
                     getData = new GetDataFromServer();
                     result = getData.execute(myUrl).get();
-                    System.out.println(result);
+                    Log.i("Skilaboð", result);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -115,7 +118,6 @@ public class RideSearchActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println(result);
         }
 
     }
