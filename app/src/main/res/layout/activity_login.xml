@@ -14,22 +14,22 @@
         android:paddingTop="56dp">
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/loginInputLayoutEmail"
+            android:id="@+id/loginInputLayoutUsername"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/loginEmail"
+                android:id="@+id/loginUsername"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/netfang"
-                android:inputType="textEmailAddress" />
+                android:hint="@string/notandanafn"
+                android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/signupInputLayoutPassword"
+            android:id="@+id/loginInputLayoutPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -53,7 +53,7 @@
             android:text="@string/skra_inn" />
 
         <Button
-            android:id="@+id/link_login"
+            android:id="@+id/link_signup"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

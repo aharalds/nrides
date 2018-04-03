@@ -24,8 +24,10 @@ public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
     private Vibrator vib;
     Animation animShake;
-    private TextInputLayout signupInputLayoutName, signupInputLayoutEmail, signupInputLayoutPhone, signupInputLayoutPassword;
-    private EditText signupInputName, signupInputEmail, signupInputPhone, signupInputPassword;
+    private TextInputLayout signupInputLayoutName, signupInputLayoutUsername,
+            signupInputLayoutEmail, signupInputLayoutPhone, signupInputLayoutPassword;
+    private EditText signupInputName, signupInputUsername, signupInputEmail,
+            signupInputPhone, signupInputPassword;
     private Button btnSignup;
     private Button linkLogin;
 
@@ -35,11 +37,13 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         signupInputLayoutName = (TextInputLayout) findViewById(R.id.signupInputLayoutName);
+        signupInputLayoutUsername = (TextInputLayout) findViewById(R.id.signupInputLayoutUsername);
         signupInputLayoutEmail = (TextInputLayout) findViewById(R.id.signupInputLayoutEmail);
         signupInputLayoutPhone = (TextInputLayout) findViewById(R.id.signupInputLayoutPhone);
         signupInputLayoutPassword = (TextInputLayout) findViewById(R.id.signupInputLayoutPassword);
 
         signupInputName = (EditText) findViewById(R.id.name);
+        signupInputUsername = (EditText) findViewById(R.id.username);
         signupInputEmail = (EditText) findViewById(R.id.email);
         signupInputPhone = (EditText) findViewById(R.id.phone);
         signupInputPassword = (EditText) findViewById(R.id.password);
@@ -80,6 +84,12 @@ public class SignupActivity extends AppCompatActivity {
             vib.vibrate(120);
             return;
         }
+        if (!checkUsername()) {
+            signupInputUsername.setAnimation(animShake);
+            signupInputUsername.startAnimation(animShake);
+            vib.vibrate(120);
+            return;
+        }
         if (!checkEmail()) {
             signupInputEmail.setAnimation(animShake);
             signupInputEmail.startAnimation(animShake);
@@ -101,7 +111,7 @@ public class SignupActivity extends AppCompatActivity {
         signupInputLayoutEmail.setErrorEnabled(false);
         signupInputLayoutPhone.setErrorEnabled(false);
         signupInputLayoutPassword.setErrorEnabled(false);
-        if (checkName() && checkEmail() && checkPassword() && checkPhone()) {
+        if (checkName() && checkUsername() && checkEmail() && checkPassword() && checkPhone()) {
             Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignupActivity.this, homeActivity.class);
             startActivity(intent);
@@ -110,7 +120,6 @@ public class SignupActivity extends AppCompatActivity {
 
     private boolean checkName() {
         if (signupInputName.getText().toString().trim().isEmpty()) {
-
             signupInputLayoutName.setErrorEnabled(true);
             signupInputLayoutName.setError(getString(R.string.err_msg_name));
             signupInputName.setError(getString(R.string.err_msg_required));
@@ -120,6 +129,19 @@ public class SignupActivity extends AppCompatActivity {
         return true;
     }
 
+    // ATH! Bæta við athugun á því hvort notandanafnið sé þegar til í gagnagrunni!
+    private boolean checkUsername() {
+        if (signupInputUsername.getText().toString().trim().isEmpty()) {
+            signupInputLayoutUsername.setErrorEnabled(true);
+            signupInputLayoutUsername.setError(getString(R.string.err_msg_username));
+            signupInputUsername.setError(getString(R.string.err_msg_required));
+            return false;
+        }
+        signupInputLayoutUsername.setErrorEnabled(false);
+        return true;
+    }
+
+    // ATH! Bæta við athugun á því hvort netfangið sé þegar til í gagnagrunni!
     private boolean checkEmail() {
         String email = signupInputEmail.getText().toString().trim();
         if (email.isEmpty() || !isValidEmail(email)) {
@@ -134,6 +156,7 @@ public class SignupActivity extends AppCompatActivity {
         return true;
     }
 
+    // ATH! Bæta við athugun á því hvort símanúmerið sé þegar til í gagnagrunni!
     private boolean checkPhone() {
         String phone = signupInputPhone.getText().toString().trim();
         if (phone.isEmpty() || phone.length() < 7) {

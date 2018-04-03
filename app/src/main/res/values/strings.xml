@@ -16,17 +16,19 @@
     <string name="netfang">Netfang</string>
     <string name="simi">Sími</string>
     <string name="lykilord">Lykilorð</string>
-    <string name="skra_inn">Skrá inn</string>
+    <string name="skra_inn">Innskráning</string>
     <string name="login_link">Þegar með aðgang? Skráðu þig inn!</string>
     <string name="register">Búa til aðgang</string>
     <string name="email">Netfang</string>
     <string name="pword">Lykilorð</string>
     <string name="err_msg_name">Vinsamlegast skráðu nafn</string>
+    <string name="err_msg_username">Vinsamlegast veldu notandanafn</string>
     <string name="err_msg_required">Nauðsynlegt að fylla út rétt gildi</string>
     <string name="err_msg_email">Vinsamlegast skráðu gilt netfang</string>
     <string name="err_msg_password">Veldu lykilorð</string>
     <string name="err_msg_phone">Vinsamlegast skráðu gilt símanúmer</string>
     <string name="bua_til_adgang">Ekki með aðgang? Búðu hann til!</string>
+    <string name="notandanafn">Notandanafn</string>
 
     <string-array name="places">
         <item>Reykjav&#237;k</item>

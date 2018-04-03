@@ -23,6 +23,7 @@
         <activity android:name=".DisplayListView"/>
         <activity android:name=".RideAdapter" />
         <activity android:name=".homeActivity" />
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>
