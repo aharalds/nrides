@@ -2,6 +2,7 @@ package is.hi.hopur16.nyttapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.design.widget.TextInputLayout;
@@ -14,6 +15,18 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import org.json.JSONException;
+import org.json.JSONObject;
+import android.util.Log;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by Hörn on 2.4.2018.
@@ -21,7 +34,7 @@ import android.widget.Toast;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private static final String TAG = "SignupActivity";
+    User user;
     private Vibrator vib;
     Animation animShake;
     private TextInputLayout signupInputLayoutName, signupInputLayoutUsername,
@@ -114,10 +127,13 @@ public class SignupActivity extends AppCompatActivity {
         if (checkName() && checkUsername() && checkEmail() && checkPassword() && checkPhone()) {
             Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignupActivity.this, homeActivity.class);
+            User sendUser = createUser();
+            intent.putExtra("newUser", sendUser);
             startActivity(intent);
         }
     }
 
+    // Aðferð sem athugar hvort nafnið sem notandi slær inn sé gilt (ekki tómt)
     private boolean checkName() {
         if (signupInputName.getText().toString().trim().isEmpty()) {
             signupInputLayoutName.setErrorEnabled(true);
@@ -170,6 +186,7 @@ public class SignupActivity extends AppCompatActivity {
         return true;
     }
 
+    // Aðferð sem athugar hvort lykilorð notanda sé gilt
     private boolean checkPassword() {
         if (signupInputPassword.getText().toString().trim().isEmpty()) {
 
@@ -181,6 +198,7 @@ public class SignupActivity extends AppCompatActivity {
         return true;
     }
 
+    // Aðferð sem athugar hvort netfangið sé gilt netfang
     private static boolean isValidEmail(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
@@ -189,5 +207,94 @@ public class SignupActivity extends AppCompatActivity {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
+    }
+
+    /**
+     * Aðferð sem býr til nýjan notanda
+     * @return User
+     */
+    public User createUser() {
+        String username = signupInputUsername.getText().toString();
+        String password = signupInputPassword.getText().toString();
+        String name = signupInputName.getText().toString();
+        String phone = signupInputPhone.getText().toString();
+        String email = signupInputEmail.getText().toString();
+
+        user = new User(username, password, name, phone, email);
+
+        JSONObject toPost = new JSONObject();
+        try {
+            toPost.put("username", username);
+            toPost.put("password", password);
+            toPost.put("name", name);
+            toPost.put("phone", phone);
+            toPost.put("email", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (toPost.length() > 0) {
+            new SignupActivity.SendJsonDataToServer().execute(String.valueOf(toPost));
+        }
+        return user;
+    }
+
+    /**
+     * Klasi sem sendir nýjan notanda í gagnagrunninn
+     */
+    class SendJsonDataToServer extends AsyncTask<String,String,String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String JsonResponse = null;
+            String JsonDATA = params[0];
+            HttpURLConnection urlConnection = null;
+            BufferedReader reader = null;
+            try {
+                URL url = new URL("https://nicerideserver.herokuapp.com/register");
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Accept", "application/json");
+                Writer writer = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8"));
+                writer.write(JsonDATA);
+                writer.close();
+                InputStream inputStream = urlConnection.getInputStream();
+                StringBuffer buffer = new StringBuffer();
+                if (inputStream == null) {
+                    // Nothing to do.
+                    return null;
+                }
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                String inputLine;
+                while ((inputLine = reader.readLine()) != null)
+                    buffer.append(inputLine + "\n");
+                if (buffer.length() == 0) {
+                    return null;
+                }
+                JsonResponse = buffer.toString();
+                return JsonResponse;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (final IOException e) {
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+        }
+
     }
 }
