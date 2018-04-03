@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">nyttApp</string>
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
+    <string name="app_name">niceride</string>
     <string name="send_btn">Senda</string>
     <string name="dateTxt">Dagsetning</string>
     <string name="seatsTxt">Laus sæti</string>
@@ -10,6 +12,21 @@
     <string name="timeTxt">HH:MM</string>
     <string name="add_ride_btn">Auglýsa</string>
     <string name="search_btn">Leita</string>
+    <string name="nafn">Nafn</string>
+    <string name="netfang">Netfang</string>
+    <string name="simi">Sími</string>
+    <string name="lykilord">Lykilorð</string>
+    <string name="skra_inn">Skrá inn</string>
+    <string name="login_link">Þegar með aðgang? Skráðu þig inn!</string>
+    <string name="register">Búa til aðgang</string>
+    <string name="email">Netfang</string>
+    <string name="pword">Lykilorð</string>
+    <string name="err_msg_name">Vinsamlegast skráðu nafn</string>
+    <string name="err_msg_required">Nauðsynlegt að fylla út rétt gildi</string>
+    <string name="err_msg_email">Vinsamlegast skráðu gilt netfang</string>
+    <string name="err_msg_password">Veldu lykilorð</string>
+    <string name="err_msg_phone">Vinsamlegast skráðu gilt símanúmer</string>
+    <string name="bua_til_adgang">Ekki með aðgang? Búðu hann til!</string>
 
     <string-array name="places">
         <item>Reykjav&#237;k</item>
