@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.util.Log;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -157,7 +156,7 @@ public class SignupActivity extends AppCompatActivity {
         return true;
     }
 
-    // ATH! Bæta við athugun á því hvort netfangið sé þegar til í gagnagrunni!
+    // Aðferð sem athugar hvort netfangið sé gilt netfang
     private boolean checkEmail() {
         String email = signupInputEmail.getText().toString().trim();
         if (email.isEmpty() || !isValidEmail(email)) {
@@ -172,7 +171,7 @@ public class SignupActivity extends AppCompatActivity {
         return true;
     }
 
-    // ATH! Bæta við athugun á því hvort símanúmerið sé þegar til í gagnagrunni!
+    // Aðferð sem athugar hvort símanúmerið sé gilt (a.m.k. 7 stafir og ekki tómt)
     private boolean checkPhone() {
         String phone = signupInputPhone.getText().toString().trim();
         if (phone.isEmpty() || phone.length() < 7) {
@@ -189,7 +188,6 @@ public class SignupActivity extends AppCompatActivity {
     // Aðferð sem athugar hvort lykilorð notanda sé gilt
     private boolean checkPassword() {
         if (signupInputPassword.getText().toString().trim().isEmpty()) {
-
             signupInputLayoutPassword.setError(getString(R.string.err_msg_password));
             requestFocus(signupInputPassword);
             return false;
@@ -294,6 +292,7 @@ public class SignupActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+
         }
 
     }
