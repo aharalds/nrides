@@ -29,6 +29,7 @@
     <string name="err_msg_phone">Vinsamlegast skráðu gilt símanúmer</string>
     <string name="bua_til_adgang">Ekki með aðgang? Búðu hann til!</string>
     <string name="notandanafn">Notandanafn</string>
+    <string name="auglysa_leita">Hvort viltu auglýsa farið þitt eða leita að lausu fari?</string>
 
     <string-array name="places">
         <item>Reykjav&#237;k</item>

@@ -14,19 +14,22 @@
         android:hint="@string/fromTxt"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/toTxt"
-        app:layout_constraintTop_toBottomOf="@+id/guideline"
-        tools:layout_editor_absoluteX="84dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
     <AutoCompleteTextView
         android:id="@+id/toTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginStart="1dp"
         android:ems="10"
         android:hint="@string/toTxt"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/dateTxt"
-        app:layout_constraintTop_toBottomOf="@+id/fromTxt"
-        tools:layout_editor_absoluteX="85dp" />
+        app:layout_constraintStart_toStartOf="@+id/fromTxt"
+        app:layout_constraintTop_toBottomOf="@+id/fromTxt" />
 
     <EditText
         android:id="@+id/dateTxt"
@@ -36,15 +39,15 @@
         android:hint="@string/dateTxt"
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/sendaBtn"
-        app:layout_constraintTop_toBottomOf="@+id/toTxt"
-        tools:layout_editor_absoluteX="85dp" />
+        app:layout_constraintStart_toStartOf="@+id/toTxt"
+        app:layout_constraintTop_toBottomOf="@+id/toTxt" />
 
     <Button
         android:id="@+id/sendaBtn"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="88dp"
-        android:layout_height="0dp"
-        android:text="@string/send_btn"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:text="@string/search_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
