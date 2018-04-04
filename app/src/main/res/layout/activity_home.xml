@@ -6,29 +6,47 @@
     android:layout_height="match_parent"
     tools:context="is.hi.hopur16.nyttapp.rideActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="336dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="62dp"
+        android:gravity="center"
+        android:text="@string/auglysa_leita"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toTopOf="@+id/addRideBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/searchRideBtn"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="88dp"
-        android:layout_height="0dp"
+        android:layout_width="262dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="131dp"
         android:text="@string/search_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addRideBtn" />
 
     <Button
         android:id="@+id/addRideBtn"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="88dp"
-        android:layout_height="0dp"
+        android:layout_width="262dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="34dp"
         android:text="@string/add_ride_btn"
         app:layout_constraintBottom_toTopOf="@+id/searchRideBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
