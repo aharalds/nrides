@@ -38,6 +38,7 @@
         android:ems="10"
         android:hint="@string/dateTxt"
         android:inputType="date"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/sendaBtn"
         app:layout_constraintStart_toStartOf="@+id/toTxt"
         app:layout_constraintTop_toBottomOf="@+id/toTxt" />
@@ -60,5 +61,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
-
+    <RelativeLayout
+        style="@style/GenericProgressBackground"
+        android:id="@+id/loadingPanel"
+        >
+        <ProgressBar
+            style="@style/GenericProgressIndicator"/>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

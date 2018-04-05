@@ -69,8 +69,8 @@ public class RideAdapter extends ArrayAdapter {
         rideHolder.tx_to.setText(ride.getRideto());
         rideHolder.tx_date.setText(ride.getDate());
         rideHolder.tx_deptime.setText(ride.getDeptime());
-        rideHolder.tx_cost.setText(String.valueOf(ride.getCost()));
-        rideHolder.tx_seats.setText(String.valueOf(ride.getSeatsavailable()));
+        rideHolder.tx_cost.setText(String.valueOf("Verð: " + ride.getCost()));
+        rideHolder.tx_seats.setText(String.valueOf("Laust: " + ride.getSeatsavailable()));
 
         return row;
     }

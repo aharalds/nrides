@@ -4,14 +4,18 @@ import is.hi.hopur16.nyttapp.Ride;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import org.json.*;
 
@@ -32,18 +36,30 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
     Ride ride;
 
     EditText dateTxt;
-    EditText fromTxt;
-    EditText toTxt;
+    AutoCompleteTextView fromTxt;
+    AutoCompleteTextView toTxt;
     EditText costTxt;
     EditText seatsTxt;
     EditText timeTxt;
     Button sendaBtn;
+    String[] places;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride);
 
+        Resources res = getResources();
+        places = res.getStringArray(R.array.places);
+        toTxt = (AutoCompleteTextView) findViewById(R.id.toTxt);
+        fromTxt = (AutoCompleteTextView) findViewById(R.id.fromTxt);
+
+        // Adapter fyrir AutoCompleteView-ið og initializa það
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, places);
+        fromTxt.setThreshold(2);
+        fromTxt.setAdapter(adapter);
+        toTxt.setThreshold(2);
+        toTxt.setAdapter(adapter);
         dateTxt = (EditText) findViewById(R.id.dateTxt);
         dateTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -59,10 +75,10 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
         sendaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(rideActivity.this, DisplayRideActivity.class);
+                Intent intent = new Intent(rideActivity.this, homeActivity.class);
                 Ride sendRide = createRide();
+               //Óþarfi??
                 intent.putExtra("newRide", sendRide);
-
                 startActivity(intent);
 
             }
@@ -81,8 +97,8 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     public Ride createRide() {
-        fromTxt = (EditText) findViewById(R.id.fromTxt);
-        toTxt = (EditText) findViewById(R.id.toTxt);
+        fromTxt = (AutoCompleteTextView) findViewById(R.id.fromTxt);
+        toTxt = (AutoCompleteTextView) findViewById(R.id.toTxt);
         costTxt = (EditText) findViewById(R.id.costTxt);
         int costInt = Integer.parseInt(String.valueOf(costTxt.getText()));
         seatsTxt = (EditText) findViewById(R.id.seatsTxt);
@@ -161,6 +177,7 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
 
         @Override
         protected void onPostExecute(String s) {
+            Toast.makeText(getApplicationContext(),"Auglýsing er uppi!" ,Toast.LENGTH_LONG).show();
         }
 
     }

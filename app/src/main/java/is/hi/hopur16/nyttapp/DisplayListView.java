@@ -1,7 +1,10 @@
 package is.hi.hopur16.nyttapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -15,6 +18,7 @@ public class DisplayListView extends AppCompatActivity {
     JSONArray jsonArray;
     RideAdapter rideAdapter;
     ListView listView;
+    Ride[] rides = new Ride[50];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +44,23 @@ public class DisplayListView extends AppCompatActivity {
 
                     Ride ride = new Ride(ridefrom, rideto, date, deptime,seatsavailable,cost);
                     rideAdapter.add(ride);
+                    rides[count] = ride;
                     count++;
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), RideInfoPopup.class);
+                intent.putExtra("info", rides[position]);
+                startActivity(intent);
+
+            }
+        });
 
 
     }

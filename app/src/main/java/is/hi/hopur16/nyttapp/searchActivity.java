@@ -14,10 +14,6 @@ import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.ads.internal.gmsg.HttpClient;
-import com.google.gson.Gson;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,8 +25,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Arrays;
 
 /**
  * Created by atliharaldsson on 12/03/2018.
@@ -45,15 +40,16 @@ public class searchActivity extends AppCompatActivity {
     TextView dateTxt;
     Button sendaBtn;
     String jsonString;
+    String[] places;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_ride);
-
+        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         // úr strings.xlm í string array í activity-i
         Resources res = getResources();
-        String[] places = res.getStringArray(R.array.places);
+        places = res.getStringArray(R.array.places);
         toTxt = (AutoCompleteTextView) findViewById(R.id.toTxt);
         fromTxt = (AutoCompleteTextView) findViewById(R.id.fromTxt);
 
@@ -103,7 +99,8 @@ public class searchActivity extends AppCompatActivity {
 
 
     public void parseJSON(String jal) {
-        if(jal == null) {
+        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+        if(jal.length() < 10) {
             Toast.makeText(getApplicationContext(),"Engin för fundin", Toast.LENGTH_LONG).show();
         } else {
             Intent intent = new Intent(searchActivity.this, DisplayListView.class);
@@ -119,11 +116,11 @@ public class searchActivity extends AppCompatActivity {
         String fromEncoded = URLEncoder.encode(fromTxt.getText().toString(), "UTF-8");
         String toEncoded = URLEncoder.encode(toTxt.getText().toString(), "UTF-8");
         Log.e("Cata", "searchForRides: " + fromTxt.getText().toString() + " : " + fromEncoded + " : " + toTxt.getText().toString() );
-        if(fromTxt.getText().toString().isEmpty() && fromTxt.getText().toString().isEmpty()) {
-            //new getJSON().execute("http://nicerideserver.herokuapp.com/");
-            Toast.makeText(getApplicationContext(),"Vinsamlegast veldu áfanga og brottafarstað!" ,Toast.LENGTH_LONG).show();
+        if(Arrays.asList(places).contains(fromTxt.getText().toString()) && Arrays.asList(places).contains(toTxt.getText().toString())) {
+            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+            new getJSON().execute("rides?rideFrom=" + fromEncoded + "&rideTo=" + toEncoded);
         } else {
-        new getJSON().execute("rides?rideFrom=" + fromEncoded + "&rideTo=" + toEncoded);
+            Toast.makeText(getApplicationContext(),"Óþekktur brottfara- eða komustaður" ,Toast.LENGTH_LONG).show();
         }
     }
 
@@ -131,14 +128,14 @@ public class searchActivity extends AppCompatActivity {
      * AsyncTask klasi sem talar við vefþjónustu
      */
     class getJSON extends AsyncTask<String, String, String> {
-        String server_response;
+        String server_response = null;
         String URL_STRING = "http://nicerideserver.herokuapp.com/";
         @Override
         protected String doInBackground(String... strings) {
             URL url;
             URI uri;
             HttpURLConnection urlConnection = null;
-
+            server_response = null;
             try {
                 if(strings[0] != null) {
                     URL_STRING += strings[0];

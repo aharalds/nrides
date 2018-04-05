@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
     tools:context="is.hi.hopur16.nyttapp.DisplayListView">
-    
-    <ListView
+
+
+    <android.support.v7.widget.FitWindowsFrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listview">
-    </ListView>
+        >
+
+        <TextView
+            android:id="@+id/headFrom"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="left"
+            android:textAllCaps="true"
+            android:text="Frá"
+            android:paddingLeft="50dp"/>
+        <TextView
+            android:id="@+id/headTo"
+            android:layout_width="match_parent"
+            android:gravity="right"
+            android:layout_height="25dp"
+            android:textAllCaps="true"
+            android:text="Til"
+            android:paddingRight="50dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="10dp"/>
+
+
+    </android.support.v7.widget.FitWindowsFrameLayout>
+    <android.support.v7.widget.FitWindowsFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
+        >
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+    </android.support.v7.widget.FitWindowsFrameLayout>
+
 
 </android.support.constraint.ConstraintLayout>

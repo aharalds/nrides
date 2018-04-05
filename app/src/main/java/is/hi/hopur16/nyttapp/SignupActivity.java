@@ -8,6 +8,7 @@ import android.os.Vibrator;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -15,6 +16,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.gson.JsonParser;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -32,6 +36,7 @@ import java.net.URL;
  */
 
 public class SignupActivity extends AppCompatActivity {
+
 
     User user;
     private Vibrator vib;
@@ -124,11 +129,14 @@ public class SignupActivity extends AppCompatActivity {
         signupInputLayoutPhone.setErrorEnabled(false);
         signupInputLayoutPassword.setErrorEnabled(false);
         if (checkName() && checkUsername() && checkEmail() && checkPassword() && checkPhone()) {
+            User sendUser = createUser();
+
             Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignupActivity.this, homeActivity.class);
-            User sendUser = createUser();
             intent.putExtra("newUser", sendUser);
             startActivity(intent);
+
+            //Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -235,14 +243,36 @@ public class SignupActivity extends AppCompatActivity {
         }
         return user;
     }
+/*
+    public void setUser(String response) {
+        JsonParser parser = new JsonParser();
+        JSONObject jOb = (JSONObject) parser.parse(response);
+        String success = jOb.getString("success");
+        String username = jOb.getString("username");
+        String password = jOb.getString("password");
+        String name = jOb.getString("name");
+        String phone = jOb.getString("phone");
+        String email = jOb.getString("email");
+        if (success == "true") {
+            user = new User(username, password, name, phone, email);
+            Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SignupActivity.this, homeActivity.class);
+            intent.putExtra("newUser", user);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
+        }
+
+    }*/
 
     /**
      * Klasi sem sendir nýjan notanda í gagnagrunninn
      */
     class SendJsonDataToServer extends AsyncTask<String,String,String> {
+        String JsonResponse = null;
         @Override
         protected String doInBackground(String... params) {
-            String JsonResponse = null;
+
             String JsonDATA = params[0];
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
@@ -271,6 +301,7 @@ public class SignupActivity extends AppCompatActivity {
                     return null;
                 }
                 JsonResponse = buffer.toString();
+
                 return JsonResponse;
 
             } catch (IOException e) {
@@ -292,6 +323,8 @@ public class SignupActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            Log.e("Response", " " + JsonResponse);
+
 
         }
 
