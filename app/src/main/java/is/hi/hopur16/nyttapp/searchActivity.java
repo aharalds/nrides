@@ -52,6 +52,7 @@ public class searchActivity extends AppCompatActivity {
         places = res.getStringArray(R.array.places);
         toTxt = (AutoCompleteTextView) findViewById(R.id.toTxt);
         fromTxt = (AutoCompleteTextView) findViewById(R.id.fromTxt);
+        dateTxt = (TextView) findViewById(R.id.dateTxt);
 
         // Adapter fyrir AutoCompleteView-ið og initializa það
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, places);
@@ -106,19 +107,20 @@ public class searchActivity extends AppCompatActivity {
             Intent intent = new Intent(searchActivity.this, DisplayListView.class);
             intent.putExtra("json_data", jal);
             startActivity(intent);
-
         }
     }
 
     public void searchForRides() throws UnsupportedEncodingException {
         fromTxt = (AutoCompleteTextView) findViewById(R.id.fromTxt);
         toTxt = (AutoCompleteTextView) findViewById(R.id.toTxt);
+        dateTxt = (TextView) findViewById(R.id.dateTxt);
+        String dateEncoded = URLEncoder.encode(dateTxt.getText().toString(), "UTF-8");
         String fromEncoded = URLEncoder.encode(fromTxt.getText().toString(), "UTF-8");
         String toEncoded = URLEncoder.encode(toTxt.getText().toString(), "UTF-8");
         Log.e("Cata", "searchForRides: " + fromTxt.getText().toString() + " : " + fromEncoded + " : " + toTxt.getText().toString() );
         if(Arrays.asList(places).contains(fromTxt.getText().toString()) && Arrays.asList(places).contains(toTxt.getText().toString())) {
             findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-            new getJSON().execute("rides?rideFrom=" + fromEncoded + "&rideTo=" + toEncoded);
+            new getJSON().execute("rides?rideFrom=" + fromEncoded + "&rideTo=" + toEncoded + "&date=" + dateEncoded);
         } else {
             Toast.makeText(getApplicationContext(),"Óþekktur brottfara- eða komustaður" ,Toast.LENGTH_LONG).show();
         }

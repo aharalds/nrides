@@ -15,6 +15,7 @@ public class UserInform {
     public User getCurrUser() {
         return currUser;
     }
+
     public Boolean isCurrUser() {
         if (currUser != null) {
             return true;

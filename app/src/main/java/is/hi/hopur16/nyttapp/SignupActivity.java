@@ -2,9 +2,11 @@ package is.hi.hopur16.nyttapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -39,6 +41,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
     User user;
+    UserInform userInfo;
     private Vibrator vib;
     Animation animShake;
     private TextInputLayout signupInputLayoutName, signupInputLayoutUsername,
@@ -129,12 +132,13 @@ public class SignupActivity extends AppCompatActivity {
         signupInputLayoutPhone.setErrorEnabled(false);
         signupInputLayoutPassword.setErrorEnabled(false);
         if (checkName() && checkUsername() && checkEmail() && checkPassword() && checkPhone()) {
-            User sendUser = createUser();
-
+            //checkUnique();
+            createUser();
+/*
             Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignupActivity.this, homeActivity.class);
             intent.putExtra("newUser", sendUser);
-            startActivity(intent);
+            startActivity(intent);*/
 
             //Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
         }
@@ -215,18 +219,58 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
+    public void checkUnique(String string_json) throws JSONException {
+        JSONObject toJsonObj = new JSONObject(string_json);
+        Boolean success = toJsonObj.getBoolean("success");
+        if (!success) {
+            Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Tókst", Toast.LENGTH_SHORT).show();
+            String uname = toJsonObj.getString("username");
+            String name = toJsonObj.getString("name");
+            String phone = toJsonObj.getString("phone");
+            String email = toJsonObj.getString("email");
+            User user = new User(uname, name, phone, email);
+
+            clearPref(uname,name,phone,email);
+
+            //userInfo.setCurrUser(user);
+            Intent intent = new Intent(SignupActivity.this, homeActivity.class);
+            startActivity(intent);
+
+
+        }
+
+    }
+
+    private void clearPref(String uname, String name, String phone, String email) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        // Hreinsa Pref
+        editor.clear();
+        editor.commit();
+
+        // Ýta nýjun upplýsingum inn í pref
+        editor.putString("username", uname);
+        editor.putString("name", name);
+        editor.putString("phone", phone);
+        editor.putString("email", email);
+        editor.apply();
+    }
+
     /**
      * Aðferð sem býr til nýjan notanda
      * @return User
      */
-    public User createUser() {
+    public void createUser() {
         String username = signupInputUsername.getText().toString();
         String password = signupInputPassword.getText().toString();
         String name = signupInputName.getText().toString();
         String phone = signupInputPhone.getText().toString();
         String email = signupInputEmail.getText().toString();
 
-        user = new User(username, password, name, phone, email);
+        //user = new User(username, password, name, phone, email);
 
         JSONObject toPost = new JSONObject();
         try {
@@ -241,29 +285,8 @@ public class SignupActivity extends AppCompatActivity {
         if (toPost.length() > 0) {
             new SignupActivity.SendJsonDataToServer().execute(String.valueOf(toPost));
         }
-        return user;
+        //return user;
     }
-/*
-    public void setUser(String response) {
-        JsonParser parser = new JsonParser();
-        JSONObject jOb = (JSONObject) parser.parse(response);
-        String success = jOb.getString("success");
-        String username = jOb.getString("username");
-        String password = jOb.getString("password");
-        String name = jOb.getString("name");
-        String phone = jOb.getString("phone");
-        String email = jOb.getString("email");
-        if (success == "true") {
-            user = new User(username, password, name, phone, email);
-            Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SignupActivity.this, homeActivity.class);
-            intent.putExtra("newUser", user);
-            startActivity(intent);
-        } else {
-            Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
-        }
-
-    }*/
 
     /**
      * Klasi sem sendir nýjan notanda í gagnagrunninn
@@ -289,7 +312,7 @@ public class SignupActivity extends AppCompatActivity {
                 InputStream inputStream = urlConnection.getInputStream();
                 StringBuffer buffer = new StringBuffer();
                 if (inputStream == null) {
-                    // Nothing to do.
+                    Log.e("Firstnull", "inputStream == null");
                     return null;
                 }
                 reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -298,6 +321,7 @@ public class SignupActivity extends AppCompatActivity {
                 while ((inputLine = reader.readLine()) != null)
                     buffer.append(inputLine + "\n");
                 if (buffer.length() == 0) {
+                    Log.e("scndNull", "buffLength == null");
                     return null;
                 }
                 JsonResponse = buffer.toString();
@@ -324,8 +348,11 @@ public class SignupActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Log.e("Response", " " + JsonResponse);
-
-
+            try {
+                checkUnique(JsonResponse);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
     }

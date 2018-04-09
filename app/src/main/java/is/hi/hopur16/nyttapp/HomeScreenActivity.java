@@ -1,7 +1,9 @@
 package is.hi.hopur16.nyttapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -20,8 +22,17 @@ public class HomeScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (preferences.contains("name")) {
+            Intent intent = new Intent(HomeScreenActivity.this, homeActivity.class);
+            startActivity(intent);
+        }
+
+
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnSignup = (Button) findViewById(R.id.btn_signup);
+
+
 
         TextView welcomeText = (TextView) findViewById(R.id.welcomeText);
         TextView moreText = (TextView) findViewById(R.id.moreText);
