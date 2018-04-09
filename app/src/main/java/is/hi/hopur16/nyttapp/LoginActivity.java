@@ -99,9 +99,6 @@ public class LoginActivity extends AppCompatActivity {
         loginInputLayoutPassword.setErrorEnabled(false);
         if (checkUsername() && checkPassword()) {
             sendUser();
-            Toast.makeText(getApplicationContext(), "Innskráning tókst!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(LoginActivity.this, homeActivity.class);
-            startActivity(intent);
         }
     }
 
@@ -138,13 +135,16 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
+    // Aðferð sem setur fókus á ákveðið view
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
 
-
+    /**
+     * Aðferð sem sendir notandanafn og lykilorð á server
+     */
     public void sendUser() {
         String username = loginInputUsername.getText().toString();
         String password = loginInputPassword.getText().toString();
@@ -161,7 +161,32 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Aðferð sem tekur við svari frá server (true/false) og ýmist gefur villumeldingu
+     * eða sendir notanda áfram (ef innskráning tókst)
+     * @param response
+     */
+    public void checkUser(String response) {
+        try {
+            JSONObject json = new JSONObject(response);
+            Boolean success = json.getBoolean("success");
 
+            if (success == false) {
+                Toast.makeText(getApplicationContext(), "Innskráning mistókst! Notandanafn eða lykilorð ekki til.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Innskráning tókst!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, homeActivity.class);
+                startActivity(intent);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Klasi sem sendir login upplýsingar í gagnagrunn
+     */
     class SendJsonDataToServer extends AsyncTask<String,String,String> {
         String JsonResponse = null;
         @Override
@@ -218,6 +243,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Log.e("Response", " " + JsonResponse);
+            checkUser(JsonResponse);
         }
 
     }
