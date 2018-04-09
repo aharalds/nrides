@@ -130,13 +130,10 @@ public class SignupActivity extends AppCompatActivity {
         signupInputLayoutPassword.setErrorEnabled(false);
         if (checkName() && checkUsername() && checkEmail() && checkPassword() && checkPhone()) {
             User sendUser = createUser();
-
             Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignupActivity.this, homeActivity.class);
             intent.putExtra("newUser", sendUser);
             startActivity(intent);
-
-            //Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -216,7 +213,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     /**
-     * Aðferð sem býr til nýjan notanda
+     * Aðferð sem býr til nýjan notanda og kallar á fall sem sendir hann á server
      * @return User
      */
     public User createUser() {
@@ -243,16 +240,37 @@ public class SignupActivity extends AppCompatActivity {
         }
         return user;
     }
-/*
+
+    /*
+    public void checkUser(String response) {
+        try {
+            JSONObject json = new JSONObject(response);
+            String success = (String) json.get("success");
+
+            if (json == null) {
+                Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SignupActivity.this, homeActivity.class);
+                intent.putExtra("newUser", user);
+                startActivity(intent);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    */
+
+    /*
     public void setUser(String response) {
         JsonParser parser = new JsonParser();
         JSONObject jOb = (JSONObject) parser.parse(response);
-        String success = jOb.getString("success");
-        String username = jOb.getString("username");
-        String password = jOb.getString("password");
-        String name = jOb.getString("name");
-        String phone = jOb.getString("phone");
-        String email = jOb.getString("email");
+        String success = jOb.get("success");
+        String username = jOb.get("username");
+        String password = jOb.get("password");
+        String name = jOb.get("name");
+        String phone = jOb.get("phone");
+        String email = jOb.get("email");
         if (success == "true") {
             user = new User(username, password, name, phone, email);
             Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
@@ -263,7 +281,8 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
         }
 
-    }*/
+    }
+    */
 
     /**
      * Klasi sem sendir nýjan notanda í gagnagrunninn
@@ -324,8 +343,7 @@ public class SignupActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Log.e("Response", " " + JsonResponse);
-
-
+            //checkUser(JsonResponse);
         }
 
     }
