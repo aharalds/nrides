@@ -223,9 +223,9 @@ public class SignupActivity extends AppCompatActivity {
         JSONObject toJsonObj = new JSONObject(string_json);
         Boolean success = toJsonObj.getBoolean("success");
         if (!success) {
-            Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Skráning mistókst! Notandanafn, símanúmer eða netfang þegar í notkun.", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getApplicationContext(), "Tókst", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Nýskráning tókst!", Toast.LENGTH_SHORT).show();
             String uname = toJsonObj.getString("username");
             String name = toJsonObj.getString("name");
             String phone = toJsonObj.getString("phone");
