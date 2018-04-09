@@ -2,9 +2,11 @@ package is.hi.hopur16.nyttapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -175,12 +177,35 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Innskráning mistókst! Notandanafn eða lykilorð ekki til.", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Innskráning tókst!", Toast.LENGTH_SHORT).show();
+
+                String username = json.getString("username");
+                String name = json.getString("name");
+                String phone = json.getString("phone");
+                String email = json.getString("email");
+                clearPref(username,name,phone,email);
+
                 Intent intent = new Intent(LoginActivity.this, homeActivity.class);
                 startActivity(intent);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void clearPref(String uname, String name, String phone, String email) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        // Hreinsa Pref
+        editor.clear();
+        editor.commit();
+
+        // Ýta nýjun upplýsingum inn í pref
+        editor.putString("username", uname);
+        editor.putString("name", name);
+        editor.putString("phone", phone);
+        editor.putString("email", email);
+        editor.apply();
     }
 
 
