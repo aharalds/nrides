@@ -39,7 +39,6 @@ import java.net.URL;
 
 public class SignupActivity extends AppCompatActivity {
 
-
     User user;
     UserInform userInfo;
     private Vibrator vib;
@@ -126,21 +125,17 @@ public class SignupActivity extends AppCompatActivity {
             signupInputPhone.setAnimation(animShake);
             signupInputPhone.startAnimation(animShake);
             vib.vibrate(120);
+            return;
         }
+
         signupInputLayoutName.setErrorEnabled(false);
+        signupInputLayoutUsername.setErrorEnabled(false);
         signupInputLayoutEmail.setErrorEnabled(false);
         signupInputLayoutPhone.setErrorEnabled(false);
         signupInputLayoutPassword.setErrorEnabled(false);
-        if (checkName() && checkUsername() && checkEmail() && checkPassword() && checkPhone()) {
-            //checkUnique();
-            createUser();
-/*
-            Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SignupActivity.this, homeActivity.class);
-            intent.putExtra("newUser", sendUser);
-            startActivity(intent);*/
 
-            //Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
+        if (checkName() && checkUsername() && checkEmail() && checkPassword() && checkPhone()) {
+            createUser();
         }
     }
 
@@ -156,7 +151,7 @@ public class SignupActivity extends AppCompatActivity {
         return true;
     }
 
-    // ATH! Bæta við athugun á því hvort notandanafnið sé þegar til í gagnagrunni!
+    // Aðferð sem athugar hvort notandanafn sé gilt (ekki tómt)
     private boolean checkUsername() {
         if (signupInputUsername.getText().toString().trim().isEmpty()) {
             signupInputLayoutUsername.setErrorEnabled(true);
@@ -234,7 +229,6 @@ public class SignupActivity extends AppCompatActivity {
 
             clearPref(uname,name,phone,email);
 
-            //userInfo.setCurrUser(user);
             Intent intent = new Intent(SignupActivity.this, homeActivity.class);
             startActivity(intent);
 
@@ -270,8 +264,6 @@ public class SignupActivity extends AppCompatActivity {
         String phone = signupInputPhone.getText().toString();
         String email = signupInputEmail.getText().toString();
 
-        //user = new User(username, password, name, phone, email);
-
         JSONObject toPost = new JSONObject();
         try {
             toPost.put("username", username);
@@ -285,7 +277,6 @@ public class SignupActivity extends AppCompatActivity {
         if (toPost.length() > 0) {
             new SignupActivity.SendJsonDataToServer().execute(String.valueOf(toPost));
         }
-        //return user;
     }
 
     /**

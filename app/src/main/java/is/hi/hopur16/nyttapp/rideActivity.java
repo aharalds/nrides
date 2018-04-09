@@ -3,12 +3,14 @@ package is.hi.hopur16.nyttapp;
 import is.hi.hopur16.nyttapp.Ride;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -16,6 +18,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.os.AsyncTask;
 import android.widget.Toast;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.os.Vibrator;
+import android.support.design.widget.TextInputLayout;
+import java.text.DateFormat;
 
 import org.json.*;
 
@@ -31,16 +38,19 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import static java.lang.Boolean.valueOf;
+
 public class rideActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     Ride ride;
 
-    EditText dateTxt;
-    AutoCompleteTextView fromTxt;
-    AutoCompleteTextView toTxt;
-    EditText costTxt;
-    EditText seatsTxt;
-    EditText timeTxt;
+    private Vibrator vib;
+    Animation animShake;
+
+    private TextInputLayout fromTxtLayout, toTxtLayout, costTxtLayout, seatsTxtLayout,
+    dateTxtLayout, timeTxtLayout;
+    private AutoCompleteTextView fromTxt, toTxt;
+    private EditText costTxt, seatsTxt, dateTxt, timeTxt;
     Button sendaBtn;
     String[] places;
 
@@ -53,6 +63,16 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
         places = res.getStringArray(R.array.places);
         toTxt = (AutoCompleteTextView) findViewById(R.id.toTxt);
         fromTxt = (AutoCompleteTextView) findViewById(R.id.fromTxt);
+
+        fromTxtLayout = findViewById(R.id.fromTxtLayout);
+        toTxtLayout = findViewById(R.id.toTxtLayout);
+        costTxtLayout = findViewById(R.id.costTxtLayout);
+        seatsTxtLayout = findViewById(R.id.seatsTxtLayout);
+        dateTxtLayout = findViewById(R.id.dateTxtLayout);
+        timeTxtLayout = findViewById(R.id.timeTxtLayout);
+
+        animShake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+        vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         // Adapter fyrir AutoCompleteView-ið og initializa það
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, places);
@@ -75,15 +95,155 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
         sendaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(rideActivity.this, homeActivity.class);
-                Ride sendRide = createRide();
-               //Óþarfi??
-                intent.putExtra("newRide", sendRide);
-                startActivity(intent);
-
+                submitForm();
             }
         });
     }
+
+    public void submitForm() {
+
+        if (!checkFrom()) {
+            fromTxt.setAnimation(animShake);
+            fromTxt.startAnimation(animShake);
+            vib.vibrate(120);
+            return;
+        }
+        if (!checkTo()) {
+            toTxt.setAnimation(animShake);
+            toTxt.startAnimation(animShake);
+            vib.vibrate(120);
+            return;
+        }
+        if (!checkSeats()) {
+            seatsTxt.setAnimation(animShake);
+            seatsTxt.startAnimation(animShake);
+            vib.vibrate(120);
+            return;
+        }
+        if (!checkCost()) {
+            costTxt.setAnimation(animShake);
+            costTxt.startAnimation(animShake);
+            vib.vibrate(120);
+            return;
+        }
+        if (!checkDate()) {
+            dateTxt.setAnimation(animShake);
+            dateTxt.startAnimation(animShake);
+            vib.vibrate(120);
+            return;
+        }
+        if (!checkTime()) {
+            timeTxt.setAnimation(animShake);
+            timeTxt.startAnimation(animShake);
+            vib.vibrate(120);
+            return;
+        }
+
+        fromTxtLayout.setErrorEnabled(false);
+        toTxtLayout.setErrorEnabled(false);
+        seatsTxtLayout.setErrorEnabled(false);
+        costTxtLayout.setErrorEnabled(false);
+        dateTxtLayout.setErrorEnabled(false);
+        timeTxtLayout.setErrorEnabled(false);
+
+        if (checkFrom() && checkTo() && checkSeats() && checkCost() && checkDate() && checkTime()) {
+            Ride sendRide = createRide();
+            Intent intent = new Intent(rideActivity.this, homeActivity.class);
+            //Óþarfi??
+            intent.putExtra("newRide", sendRide);
+            startActivity(intent);
+        }
+
+    }
+
+    // Aðferð sem athugar hvort brottfararstaður sem notandi slær inn sé tókur
+    private boolean checkFrom() {
+        if (fromTxt.getText().toString().trim().isEmpty()) {
+            fromTxtLayout.setErrorEnabled(true);
+            fromTxtLayout.setError(getString(R.string.err_msg_from));
+            fromTxt.setError(getString(R.string.err_msg_req));
+            requestFocus(fromTxt);
+            return false;
+        }
+        fromTxtLayout.setErrorEnabled(false);
+        return true;
+    }
+
+    // Aðferð sem athugar hvort áfangastaður sé gildur (ekki tómur)
+    private boolean checkTo() {
+        if (toTxt.getText().toString().trim().isEmpty()) {
+            toTxtLayout.setErrorEnabled(true);
+            toTxtLayout.setError(getString(R.string.err_msg_to));
+            toTxt.setError(getString(R.string.err_msg_req));
+            requestFocus(toTxt);
+            return false;
+        }
+        toTxtLayout.setErrorEnabled(false);
+        return true;
+    }
+
+    // Aðferð sem athugar hvort sætafjöldi sé gildur (hvorki tómur né 0)
+    private boolean checkSeats() {
+        String seats = seatsTxt.getText().toString().trim();
+        if (seats.isEmpty() || seats.equals("0")) {
+            seatsTxtLayout.setErrorEnabled(true);
+            seatsTxtLayout.setError(getString(R.string.err_msg_seats));
+            seatsTxt.setError(getString(R.string.err_msg_req));
+            requestFocus(seatsTxt);
+            return false;
+        }
+        seatsTxtLayout.setErrorEnabled(false);
+        return true;
+    }
+
+    // Aðferð sem athugar hvort kostnaður sé gildur (ekki tómur)
+    private boolean checkCost() {
+        if (costTxt.getText().toString().trim().isEmpty()) {
+            costTxtLayout.setErrorEnabled(true);
+            costTxtLayout.setError(getString(R.string.err_msg_cost));
+            costTxt.setError(getString(R.string.err_msg_req));
+            requestFocus(costTxt);
+            return false;
+        }
+        costTxtLayout.setErrorEnabled(false);
+        return true;
+    }
+
+    // Aðferð sem athugar hvort dagsetning sé gild (ekki tóm)
+    private boolean checkDate() {
+        if (dateTxt.getText().toString().trim().isEmpty()) {
+            dateTxtLayout.setError(getString(R.string.err_msg_date));
+            dateTxt.setError(getString(R.string.err_msg_req));
+            requestFocus(dateTxt);
+            return false;
+        }
+        dateTxtLayout.setErrorEnabled(false);
+        return true;
+    }
+
+    // Aðferð sem athugar hvort tímasetning sé gild
+    private boolean checkTime() {
+        String time = timeTxt.getText().toString().trim();
+        String[] splitTime = time.split(":");
+        int hour = Integer.parseInt(splitTime[0]);
+        int min = Integer.parseInt(splitTime[1]);
+        if (time.isEmpty() || (hour<0 || hour>24) || (min<0 || min>59)) {
+            timeTxtLayout.setError(getString(R.string.err_msg_time));
+            timeTxt.setError(getString(R.string.err_msg_req));
+            requestFocus(timeTxt);
+            return false;
+        }
+        timeTxtLayout.setErrorEnabled(false);
+        return true;
+    }
+
+    // Aðferð sem setur fókus á tiltekið view
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
