@@ -16,9 +16,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.gson.JsonParser;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -36,7 +33,6 @@ import java.net.URL;
  */
 
 public class SignupActivity extends AppCompatActivity {
-
 
     User user;
     private Vibrator vib;
@@ -130,10 +126,6 @@ public class SignupActivity extends AppCompatActivity {
         signupInputLayoutPassword.setErrorEnabled(false);
         if (checkName() && checkUsername() && checkEmail() && checkPassword() && checkPhone()) {
             User sendUser = createUser();
-            Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SignupActivity.this, homeActivity.class);
-            intent.putExtra("newUser", sendUser);
-            startActivity(intent);
         }
     }
 
@@ -149,7 +141,7 @@ public class SignupActivity extends AppCompatActivity {
         return true;
     }
 
-    // ATH! Bæta við athugun á því hvort notandanafnið sé þegar til í gagnagrunni!
+    // Aðferð sem athugar hvort notandanafn sé gilt (ekki tómt)
     private boolean checkUsername() {
         if (signupInputUsername.getText().toString().trim().isEmpty()) {
             signupInputLayoutUsername.setErrorEnabled(true);
@@ -206,6 +198,7 @@ public class SignupActivity extends AppCompatActivity {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+    // Aðferð sem setur fókus á ákveðið view
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -241,14 +234,18 @@ public class SignupActivity extends AppCompatActivity {
         return user;
     }
 
-    /*
+    /**
+     * Aðferð sem tekur við svari frá server (true/false) og ýmist gefur villumeldingu
+     * eða sendir notanda áfram (ef nýskráning tókst)
+     * @param response
+     */
     public void checkUser(String response) {
         try {
             JSONObject json = new JSONObject(response);
-            String success = (String) json.get("success");
+            Boolean success = json.getBoolean("success");
 
-            if (json == null) {
-                Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
+            if (success == false) {
+                Toast.makeText(getApplicationContext(), "Skráning mistókst! Notandanafn, símanúmer eða netfang þegar í notkun", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignupActivity.this, homeActivity.class);
@@ -259,30 +256,6 @@ public class SignupActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    */
-
-    /*
-    public void setUser(String response) {
-        JsonParser parser = new JsonParser();
-        JSONObject jOb = (JSONObject) parser.parse(response);
-        String success = jOb.get("success");
-        String username = jOb.get("username");
-        String password = jOb.get("password");
-        String name = jOb.get("name");
-        String phone = jOb.get("phone");
-        String email = jOb.get("email");
-        if (success == "true") {
-            user = new User(username, password, name, phone, email);
-            Toast.makeText(getApplicationContext(), "Skráning tókst!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SignupActivity.this, homeActivity.class);
-            intent.putExtra("newUser", user);
-            startActivity(intent);
-        } else {
-            Toast.makeText(getApplicationContext(), "Skráning mistókst! notendanafn/nr/email í notkun", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-    */
 
     /**
      * Klasi sem sendir nýjan notanda í gagnagrunninn
@@ -343,7 +316,7 @@ public class SignupActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Log.e("Response", " " + JsonResponse);
-            //checkUser(JsonResponse);
+            checkUser(JsonResponse);
         }
 
     }

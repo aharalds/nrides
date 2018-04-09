@@ -25,8 +25,8 @@ public class HomeScreenActivity extends AppCompatActivity {
 
         TextView welcomeText = (TextView) findViewById(R.id.welcomeText);
         TextView moreText = (TextView) findViewById(R.id.moreText);
-        welcomeText.setTextColor(Color.parseColor("#000000"));
-        moreText.setTextColor(Color.parseColor("#000000"));
+        welcomeText.setTextColor(Color.parseColor("black"));
+        moreText.setTextColor(Color.parseColor("black"));
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
