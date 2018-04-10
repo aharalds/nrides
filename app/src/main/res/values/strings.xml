@@ -34,8 +34,8 @@
     <string name="err_msg_to">Vinsamlegast veldu áfangastað</string>
     <string name="err_msg_seats">Vinsamlegast tilgreindu fjölda lausra sæta</string>
     <string name="err_msg_cost">Vinsamlegast skráðu kostnað per farþega</string>
-    <string name="err_msg_date">Vinsamlegast skráðu dagsetningu</string>
-    <string name="err_msg_time">Vinsamlegast skráðu tímasetningu</string>
+    <string name="err_msg_date">Vinsamlegast veldu dagsetningu</string>
+    <string name="err_msg_time">Vinsamlegast skráðu gilda tímasetningu</string>
     <string name="err_msg_req">Nauðsynlegt að fylla út þennan reit</string>
 
     <string-array name="places">

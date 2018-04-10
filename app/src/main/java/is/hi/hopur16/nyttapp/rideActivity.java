@@ -64,6 +64,11 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
         toTxt = (AutoCompleteTextView) findViewById(R.id.toTxt);
         fromTxt = (AutoCompleteTextView) findViewById(R.id.fromTxt);
 
+        costTxt = (EditText) findViewById(R.id.costTxt);
+        seatsTxt = (EditText) findViewById(R.id.seatsTxt);
+        dateTxt = (EditText) findViewById(R.id.dateTxt);
+        timeTxt = (EditText) findViewById(R.id.timeTxt);
+
         fromTxtLayout = findViewById(R.id.fromTxtLayout);
         toTxtLayout = findViewById(R.id.toTxtLayout);
         costTxtLayout = findViewById(R.id.costTxtLayout);
@@ -224,15 +229,35 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
     // Aðferð sem athugar hvort tímasetning sé gild
     private boolean checkTime() {
         String time = timeTxt.getText().toString().trim();
-        String[] splitTime = time.split(":");
-        int hour = Integer.parseInt(splitTime[0]);
-        int min = Integer.parseInt(splitTime[1]);
-        if (time.isEmpty() || (hour<0 || hour>24) || (min<0 || min>59)) {
+        if (time.isEmpty()) {
             timeTxtLayout.setError(getString(R.string.err_msg_time));
             timeTxt.setError(getString(R.string.err_msg_req));
             requestFocus(timeTxt);
             return false;
+        } else if (time.contains(":")) {
+            String[] splitTime = time.split(":");
+            int hour = Integer.parseInt(splitTime[0]);
+            int min = Integer.parseInt(splitTime[1]);
+            if (hour > 24 || min > 59) {
+                timeTxtLayout.setError(getString(R.string.err_msg_time));
+                timeTxt.setError(getString(R.string.err_msg_req));
+                requestFocus(timeTxt);
+                return false;
+            }
+        } else {
+            String subString1 = time.substring(0,2);
+            String subString2 = time.substring(2);
+            int hour = Integer.parseInt(subString1);
+            int min = Integer.parseInt(subString2);
+            if (hour > 24 || min > 59) {
+                timeTxtLayout.setError(getString(R.string.err_msg_time));
+                timeTxt.setError(getString(R.string.err_msg_req));
+                requestFocus(timeTxt);
+                return false;
+            }
         }
+
+
         timeTxtLayout.setErrorEnabled(false);
         return true;
     }
