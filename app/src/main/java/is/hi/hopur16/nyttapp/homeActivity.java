@@ -60,14 +60,13 @@ public class homeActivity extends AppCompatActivity  {
     public void checkLog() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        Boolean isLogged = preferences.contains("name");
+        Boolean isLogged = preferences.contains("username");
         if(isLogged) {
             editor.clear();
             editor.commit();
-            Intent intent = new Intent(homeActivity.this, HomeScreenActivity.class);
-            startActivity(intent);
-    }
-
+        }
+        Intent intent = new Intent(homeActivity.this, HomeScreenActivity.class);
+        startActivity(intent);
     }
 }
 

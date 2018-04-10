@@ -29,7 +29,7 @@ public class DisplayListView extends AppCompatActivity {
         listView.setAdapter(rideAdapter);
         json_string = getIntent().getExtras().getString("json_data");
         try {
-            String ridefrom,rideto,date,deptime;
+            String ridefrom,rideto,date,deptime,username,email,phone;
             int cost,seatsavailable;
             jsonArray = new JSONArray(json_string);
             int count = 0;
@@ -41,8 +41,13 @@ public class DisplayListView extends AppCompatActivity {
                     deptime = JO.getString("deptime");
                     cost = JO.getInt("cost");
                     seatsavailable = JO.getInt("seatsavailable");
+                    username = JO.getString("username");
+                    phone = JO.getString("phone");
+                    email = JO.getString("email");
 
-                    Ride ride = new Ride(ridefrom, rideto, date, deptime,seatsavailable,cost);
+
+
+                    Ride ride = new Ride(ridefrom, rideto, date, deptime,seatsavailable,cost, username, phone, email);
                     rideAdapter.add(ride);
                     rides[count] = ride;
                     count++;

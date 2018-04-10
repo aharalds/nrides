@@ -4,7 +4,9 @@ import is.hi.hopur16.nyttapp.Ride;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -97,6 +99,12 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     public Ride createRide() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        String username = preferences.getString("username", "NOSTRING");
+        String phone = preferences.getString("phone","");
+        String email = preferences.getString("email", "");
         fromTxt = (AutoCompleteTextView) findViewById(R.id.fromTxt);
         toTxt = (AutoCompleteTextView) findViewById(R.id.toTxt);
         costTxt = (EditText) findViewById(R.id.costTxt);
@@ -105,7 +113,8 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
         int seatsInt = Integer.parseInt(String.valueOf(seatsTxt.getText()));
         dateTxt = (EditText) findViewById(R.id.dateTxt);
         timeTxt = (EditText) findViewById(R.id.timeTxt);
-        ride = new Ride(fromTxt.getText().toString(),toTxt.getText().toString(), dateTxt.getText().toString(), timeTxt.getText().toString(), seatsInt, costInt);
+        ride = new Ride(fromTxt.getText().toString(),toTxt.getText().toString(), dateTxt.getText().toString(), timeTxt.getText().toString(),
+                seatsInt, costInt, username, phone, email);
         JSONObject toPost = new JSONObject();
         try {
             toPost.put("rideFrom", fromTxt.getText().toString());
@@ -114,6 +123,9 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
             toPost.put("depTime", timeTxt.getText().toString());
             toPost.put("seatsAvailable", seatsInt);
             toPost.put("cost", costInt);
+            toPost.put("userName",username);
+            toPost.put("phone", phone);
+            toPost.put("email", email);
             System.out.println(toPost.toString());
         } catch (JSONException e) {
             e.printStackTrace();

@@ -23,7 +23,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (preferences.contains("name")) {
+        if (preferences.contains("username")) {
             Intent intent = new Intent(HomeScreenActivity.this, homeActivity.class);
             startActivity(intent);
         }
@@ -55,5 +55,4 @@ public class HomeScreenActivity extends AppCompatActivity {
             }
         });
     }
-
 }
