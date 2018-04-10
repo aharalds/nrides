@@ -1,16 +1,25 @@
 package is.hi.hopur16.nyttapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,18 +34,23 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import android.app.DatePickerDialog;
 
 /**
  * Created by atliharaldsson on 12/03/2018.
  */
 
-public class searchActivity extends AppCompatActivity {
+public class searchActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private static final String ALLOWED_URI_CHARS = "@#&=*+-_.,:!?()/~'%ÁáÍíðÐþÞéÉÖÆæöúÚ";
     Ride[] rides;
-    AutoCompleteTextView fromTxt;
-    AutoCompleteTextView toTxt;
+    private Vibrator vib;
+    Animation animShake;
+    private AutoCompleteTextView fromTxt, toTxt;
+    private TextInputLayout fromTxtLayout, toTxtLayout, dateTxtLayout;
     TextView dateTxt;
     Button sendaBtn;
     String jsonString;
@@ -46,13 +60,20 @@ public class searchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_ride);
-        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+        //findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         // úr strings.xlm í string array í activity-i
         Resources res = getResources();
         places = res.getStringArray(R.array.places);
         toTxt = (AutoCompleteTextView) findViewById(R.id.toTxt);
         fromTxt = (AutoCompleteTextView) findViewById(R.id.fromTxt);
         dateTxt = (TextView) findViewById(R.id.dateTxt);
+
+        fromTxtLayout = findViewById(R.id.fromTxtLayout);
+        toTxtLayout = findViewById(R.id.toTxtLayout);
+        dateTxtLayout = findViewById(R.id.dateTxtLayout);
+
+        animShake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+        vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         // Adapter fyrir AutoCompleteView-ið og initializa það
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, places);
@@ -61,20 +82,120 @@ public class searchActivity extends AppCompatActivity {
         toTxt.setThreshold(2);
         toTxt.setAdapter(adapter);
 
+        dateTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    DialogFragment datePicker = new DatePickerFragment();
+                    datePicker.show(getSupportFragmentManager(), "date picker");
+                }
+            }
+        });
 
         sendaBtn = (Button) findViewById(R.id.sendaBtn);
         sendaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    searchForRides();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                submitForm();
             }
         });
 
     }
+
+
+    // Aðferð sem athugar hvort input frá notanda sé gilt
+    public void submitForm() {
+
+        if (!checkFrom()) {
+            fromTxt.setAnimation(animShake);
+            fromTxt.startAnimation(animShake);
+            vib.vibrate(120);
+            return;
+        }
+        if (!checkTo()) {
+            toTxt.setAnimation(animShake);
+            toTxt.startAnimation(animShake);
+            vib.vibrate(120);
+            return;
+        }
+        if (!checkDate()) {
+            dateTxt.setAnimation(animShake);
+            dateTxt.startAnimation(animShake);
+            vib.vibrate(120);
+            return;
+        }
+
+        fromTxtLayout.setErrorEnabled(false);
+        toTxtLayout.setErrorEnabled(false);
+        dateTxtLayout.setErrorEnabled(false);
+
+        if (checkFrom() && checkTo() && checkDate()) {
+            try {
+                searchForRides();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    // Aðferð sem athugar hvort brottfararstaður sem notandi slær inn sé tókur
+    private boolean checkFrom() {
+        if (fromTxt.getText().toString().trim().isEmpty()) {
+            fromTxtLayout.setErrorEnabled(true);
+            fromTxtLayout.setError(getString(R.string.err_msg_from));
+            fromTxt.setError(getString(R.string.err_msg_req));
+            requestFocus(fromTxt);
+            return false;
+        }
+        fromTxtLayout.setErrorEnabled(false);
+        return true;
+    }
+
+    // Aðferð sem athugar hvort áfangastaður sé gildur (ekki tómur)
+    private boolean checkTo() {
+        if (toTxt.getText().toString().trim().isEmpty()) {
+            toTxtLayout.setErrorEnabled(true);
+            toTxtLayout.setError(getString(R.string.err_msg_to));
+            toTxt.setError(getString(R.string.err_msg_req));
+            requestFocus(toTxt);
+            return false;
+        }
+        toTxtLayout.setErrorEnabled(false);
+        return true;
+    }
+
+    // Aðferð sem athugar hvort dagsetning sé gild (ekki tóm)
+    private boolean checkDate() {
+        if (dateTxt.getText().toString().trim().isEmpty()) {
+            dateTxtLayout.setError(getString(R.string.err_msg_date));
+            dateTxt.setError(getString(R.string.err_msg_req));
+            requestFocus(dateTxt);
+            return false;
+        }
+        dateTxtLayout.setErrorEnabled(false);
+        return true;
+    }
+
+    // Aðferð sem setur fókus á tiltekið view
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String currentDate = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(c.getTime());
+        dateTxt.setText(currentDate);
+
+    }
+
+
     private String readStream(InputStream in) {
         BufferedReader reader = null;
         StringBuffer response = new StringBuffer();
@@ -100,9 +221,9 @@ public class searchActivity extends AppCompatActivity {
 
 
     public void parseJSON(String jal) {
-        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+        //findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         if(jal.length() < 10) {
-            Toast.makeText(getApplicationContext(),"Engin för fundin", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Engin för fundust", Toast.LENGTH_LONG).show();
         } else {
             Intent intent = new Intent(searchActivity.this, DisplayListView.class);
             intent.putExtra("json_data", jal);
@@ -119,7 +240,7 @@ public class searchActivity extends AppCompatActivity {
         String toEncoded = URLEncoder.encode(toTxt.getText().toString(), "UTF-8");
         Log.e("Cata", "searchForRides: " + fromTxt.getText().toString() + " : " + fromEncoded + " : " + toTxt.getText().toString() );
         if(Arrays.asList(places).contains(fromTxt.getText().toString()) && Arrays.asList(places).contains(toTxt.getText().toString())) {
-            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+            //findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
             new getJSON().execute("rides?rideFrom=" + fromEncoded + "&rideTo=" + toEncoded + "&date=" + dateEncoded);
         } else {
             Toast.makeText(getApplicationContext(),"Óþekktur brottfara- eða komustaður" ,Toast.LENGTH_LONG).show();

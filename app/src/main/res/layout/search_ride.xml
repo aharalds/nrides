@@ -1,70 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context="is.hi.hopur16.nyttapp.searchActivity">
 
-    <AutoCompleteTextView
-        android:id="@+id/fromTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/fromTxt"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/toTxt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="56dp">
 
-    <AutoCompleteTextView
-        android:id="@+id/toTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
-        android:layout_marginStart="1dp"
-        android:ems="10"
-        android:hint="@string/toTxt"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/dateTxt"
-        app:layout_constraintStart_toStartOf="@+id/fromTxt"
-        app:layout_constraintTop_toBottomOf="@+id/fromTxt" />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/fromTxtLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/dateTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/dateTxt"
-        android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/sendaBtn"
-        app:layout_constraintStart_toStartOf="@+id/toTxt"
-        app:layout_constraintTop_toBottomOf="@+id/toTxt" />
+            <AutoCompleteTextView
+                android:id="@+id/fromTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/fromTxt"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/toTxt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
-    <Button
-        android:id="@+id/sendaBtn"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="204dp"
-        android:layout_height="wrap_content"
-        android:text="@string/search_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateTxt" />
+        </android.support.design.widget.TextInputLayout>
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
-    <RelativeLayout
-        style="@style/GenericProgressBackground"
-        android:id="@+id/loadingPanel"
-        >
-        <ProgressBar
-            style="@style/GenericProgressIndicator"/>
-    </RelativeLayout>
-</android.support.constraint.ConstraintLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/toTxtLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/toTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/toTxt"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/dateTxt"
+                app:layout_constraintStart_toStartOf="@+id/fromTxt"
+                app:layout_constraintTop_toBottomOf="@+id/fromTxt" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/dateTxtLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/dateTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/dateTxt"
+                android:inputType="date"
+                app:layout_constraintBottom_toTopOf="@+id/sendaBtn"
+                app:layout_constraintStart_toStartOf="@+id/toTxt"
+                app:layout_constraintTop_toBottomOf="@+id/toTxt" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/sendaBtn"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/search_btn"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            tools:layout_editor_absoluteX="90dp"
+            tools:layout_editor_absoluteY="463dp" />
+
+        <!--
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            style="@style/GenericProgressBackground">
+
+            <ProgressBar style="@style/GenericProgressIndicator" />
+        </RelativeLayout>
+        -->
+
+    </LinearLayout>
+</ScrollView>
+

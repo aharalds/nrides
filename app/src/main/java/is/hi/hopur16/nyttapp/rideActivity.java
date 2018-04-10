@@ -85,6 +85,8 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
         fromTxt.setAdapter(adapter);
         toTxt.setThreshold(2);
         toTxt.setAdapter(adapter);
+
+        // Veljum dagsetningu með datepicker
         dateTxt = (EditText) findViewById(R.id.dateTxt);
         dateTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -105,6 +107,7 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
         });
     }
 
+    // Aðferð sem athugar hvort input frá notanda sé gilt
     public void submitForm() {
 
         if (!checkFrom()) {

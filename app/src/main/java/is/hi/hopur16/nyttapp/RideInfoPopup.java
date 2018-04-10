@@ -19,7 +19,7 @@ public class RideInfoPopup extends AppCompatActivity {
         TextView cost = (TextView) findViewById(R.id.cost);
         TextView seats = (TextView) findViewById(R.id.seats);
         TextView depTime = (TextView) findViewById(R.id.dep);
-        cost.setText("Kostnaður hvers farðþega: " + String.valueOf(ride.getCost()));
+        cost.setText("Kostnaður hvers farþega: " + String.valueOf(ride.getCost()));
         seats.setText("Laus sæti: " + String.valueOf(ride.getSeatsavailable()));
         depTime.setText("Brottför " + ride.getDate() + " klukkan " + ride.getDeptime());
     }
