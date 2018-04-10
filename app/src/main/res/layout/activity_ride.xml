@@ -16,84 +16,132 @@
         android:paddingRight="24dp"
         android:paddingTop="56dp">
 
-        <AutoCompleteTextView
-            android:id="@+id/fromTxt"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/fromTxtLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:hint="@string/fromTxt"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/toTxt"
-            app:layout_constraintEnd_toEndOf="@+id/toTxt"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/toTxt"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent">
 
-        <AutoCompleteTextView
-            android:id="@+id/toTxt"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:hint="@string/toTxt"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/seatsTxt"
-            app:layout_constraintEnd_toEndOf="@+id/seatsTxt"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/seatsTxt"
-            app:layout_constraintTop_toBottomOf="@+id/fromTxt" />
+            <AutoCompleteTextView
+                android:id="@+id/fromTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/fromTxt"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/toTxt"
+                app:layout_constraintEnd_toEndOf="@+id/toTxt"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/toTxt"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/seatsTxt"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:hint="@string/seatsTxt"
-            android:inputType="number"
-            app:layout_constraintBottom_toTopOf="@+id/costTxt"
-            app:layout_constraintEnd_toEndOf="@+id/costTxt"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/costTxt"
-            app:layout_constraintTop_toBottomOf="@+id/toTxt"
-            app:layout_constraintVertical_bias="0.462" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/costTxt"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/toTxtLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:hint="@string/costTxt"
-            android:inputType="number"
-            app:layout_constraintBottom_toTopOf="@+id/dateTxt"
-            app:layout_constraintEnd_toEndOf="@+id/dateTxt"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/dateTxt"
-            app:layout_constraintTop_toBottomOf="@+id/seatsTxt" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/dateTxt"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:hint="@string/dateTxt"
-            android:inputType="date"
-            app:layout_constraintBottom_toTopOf="@+id/timeTxt"
-            app:layout_constraintEnd_toEndOf="@+id/timeTxt"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/timeTxt"
-            app:layout_constraintTop_toBottomOf="@+id/costTxt" />
+            <AutoCompleteTextView
+                android:id="@+id/toTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/toTxt"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/seatsTxt"
+                app:layout_constraintEnd_toEndOf="@+id/seatsTxt"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/seatsTxt"
+                app:layout_constraintTop_toBottomOf="@+id/fromTxt" />
 
-        <EditText
-            android:id="@+id/timeTxt"
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/seatsTxtLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:hint="@string/timeTxt"
-            android:inputType="time"
-            app:layout_constraintBottom_toTopOf="@+id/sendaBtn"
-            app:layout_constraintEnd_toEndOf="@+id/sendaBtn"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="@+id/sendaBtn"
-            app:layout_constraintTop_toBottomOf="@+id/dateTxt" />
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/seatsTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/seatsTxt"
+                android:inputType="number"
+                app:layout_constraintBottom_toTopOf="@+id/costTxt"
+                app:layout_constraintEnd_toEndOf="@+id/costTxt"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/costTxt"
+                app:layout_constraintTop_toBottomOf="@+id/toTxt"
+                app:layout_constraintVertical_bias="0.462" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/costTxtLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/costTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/costTxt"
+                android:inputType="number"
+                app:layout_constraintBottom_toTopOf="@+id/dateTxt"
+                app:layout_constraintEnd_toEndOf="@+id/dateTxt"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/dateTxt"
+                app:layout_constraintTop_toBottomOf="@+id/seatsTxt" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/dateTxtLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/dateTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/dateTxt"
+                android:inputType="date"
+                app:layout_constraintBottom_toTopOf="@+id/timeTxt"
+                app:layout_constraintEnd_toEndOf="@+id/timeTxt"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/timeTxt"
+                app:layout_constraintTop_toBottomOf="@+id/costTxt" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/timeTxtLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/timeTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/timeTxt"
+                android:inputType="time"
+                app:layout_constraintBottom_toTopOf="@+id/sendaBtn"
+                app:layout_constraintEnd_toEndOf="@+id/sendaBtn"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="@+id/sendaBtn"
+                app:layout_constraintTop_toBottomOf="@+id/dateTxt" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/sendaBtn"
