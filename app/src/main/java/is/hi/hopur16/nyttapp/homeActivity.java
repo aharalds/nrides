@@ -27,7 +27,6 @@ import java.net.URL;
 
 public class homeActivity extends AppCompatActivity  {
 
-    UserInform userInfo;
     Button searchRideBtn;
     Button addRideBtn;
     Button logoutButton;

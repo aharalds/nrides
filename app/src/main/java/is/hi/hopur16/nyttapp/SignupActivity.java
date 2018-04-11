@@ -39,8 +39,6 @@ import java.net.URL;
 
 public class SignupActivity extends AppCompatActivity {
 
-    User user;
-    UserInform userInfo;
     private Vibrator vib;
     Animation animShake;
     private TextInputLayout signupInputLayoutName, signupInputLayoutUsername,
@@ -293,6 +291,7 @@ public class SignupActivity extends AppCompatActivity {
                 URL url = new URL("https://nicerideserver.herokuapp.com/register");
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setDoOutput(true);
+                urlConnection.setConnectTimeout(5000);
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Accept", "application/json");

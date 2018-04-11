@@ -35,6 +35,7 @@ public class RideEditPopup extends AppCompatActivity {
     Button btnCommit;
     Button btnDelete;
     homeActivity act;
+    String newSeats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,24 @@ public class RideEditPopup extends AppCompatActivity {
         setContentView(R.layout.activity_ride_change_popup);
 
         Intent intent = getIntent();
-        final Ride ride = (Ride)intent.getSerializableExtra("info");
+        final Ride ride = (Ride) intent.getSerializableExtra("info");
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        TextView driver = (TextView) findViewById(R.id.driver);
+        driver.setText("Breyta Auglýsingu");
+        final Spinner dropdown = findViewById(R.id.spinner1);
+        final String[] items = new String[]{"1", "2", "3", "4", "5", "6", "7", "8"};
+        String seats = String.valueOf(ride.getSeatsavailable());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
+        if (seats != null) {
+            int spinnerPosition = adapter.getPosition(seats);
+            dropdown.setSelection(spinnerPosition);
+        } else {
+            dropdown.setSelection(1);
+        }
+
 
         btnCommit = (Button) findViewById(R.id.btnCommit);
         btnDelete = (Button) findViewById(R.id.btnDelete);
@@ -51,7 +69,12 @@ public class RideEditPopup extends AppCompatActivity {
         btnCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int pos = dropdown.getSelectedItemPosition();
+                newSeats = items[pos];
+                pos = Integer.valueOf(newSeats);
+                if(pos != ride.getSeatsavailable()) {
+                    jsonUpdate(ride.getId(),pos);
+                }
             }
         });
 
@@ -61,19 +84,29 @@ public class RideEditPopup extends AppCompatActivity {
                 jsonDelete(ride.getId());
             }
         });
+    }
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+    public void checkChange(String jsonString) {
 
-        TextView driver = (TextView) findViewById(R.id.driver);
-        driver.setText("Breyta Auglýsingu");
-        Spinner dropdown = findViewById(R.id.spinner1);
-        String[] items = new String[]{"1", "2", "3", "4", "5", "6", "7", "8"};
-        String seats = String.valueOf(ride.getSeatsavailable());
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
-        if (seats != null) {
-            int spinnerPosition = adapter.getPosition(seats);
-            dropdown.setSelection(spinnerPosition);
+        if (jsonString.length() < 10) {
+            Toast.makeText(getApplicationContext(),"Tókst ekki!" ,Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this, homeActivity.class);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(),newSeats + " sæti laus" ,Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void jsonUpdate(int id, int seats) {
+        JSONObject toPost = new JSONObject();
+        try {
+            toPost.put("seatsAvailable", seats);
+            System.out.println(toPost.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (toPost.length() > 0) {
+            new updateData().execute(String.valueOf(id),String.valueOf(toPost));
         }
     }
 
@@ -106,6 +139,7 @@ public class RideEditPopup extends AppCompatActivity {
                 urlConnection.setDoOutput(true);
                 urlConnection.setRequestMethod("DELETE");
                 urlConnection.setRequestProperty("charset", "utf-8");
+                urlConnection.setConnectTimeout(5000);
                 Log.e("TAG" , " :" + urlConnection.getResponseCode());
                 if (urlConnection.getResponseCode() == 201) {
                     jsonR = "true";
@@ -133,5 +167,68 @@ public class RideEditPopup extends AppCompatActivity {
 
         }
 
+    }
+    class updateData extends AsyncTask<String,String,String> {
+        String jsonR = "";
+        @Override
+        protected String doInBackground(String... params) {
+            String JsonResponse = null;
+            String JsonID = params[0];
+            String JsonDATA = params[1];
+            HttpURLConnection urlConnection = null;
+            BufferedReader reader = null;
+            try {
+                URL url = new URL("http://nicerideserver.herokuapp.com/patch/" + JsonID);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Accept", "application/json");
+                urlConnection.setConnectTimeout(5000);
+                Writer writer = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8"));
+                writer.write(JsonDATA);
+                writer.close();
+                InputStream inputStream = urlConnection.getInputStream();
+                StringBuffer buffer = new StringBuffer();
+                if (inputStream == null) {
+                    // Nothing to do.
+                    return null;
+                }
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                String inputLine;
+                while ((inputLine = reader.readLine()) != null)
+                    buffer.append(inputLine + "\n");
+                if (buffer.length() == 0) {
+                    return null;
+                }
+                JsonResponse = buffer.toString();
+                jsonR = JsonResponse;
+                Log.e("MSG" , " : " + JsonResponse);
+                return JsonResponse;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (final IOException e) {
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            checkChange(jsonR);
+            this.cancel(true);
+
+        }
     }
 }
