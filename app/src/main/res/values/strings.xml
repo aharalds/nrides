@@ -37,8 +37,6 @@
     <string name="err_msg_date">Vinsamlegast veldu dagsetningu</string>
     <string name="err_msg_time">Vinsamlegast skráðu gilda tímasetningu</string>
     <string name="err_msg_req">Nauðsynlegt að fylla út þennan reit</string>
-    <string name="skra_inn_eda_adgang">Skráðu þig inn eða búðu til aðgang</string>
-    <string name="velkomin">Velkomin/n á niceride!</string>
 
     <string-array name="places">
         <item>Reykjav&#237;k</item>
