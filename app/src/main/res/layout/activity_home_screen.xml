@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Velkomin/n á nicerides!"
+            android:text="@string/velkomin"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="79dp"
             android:gravity="center"
-            android:text="Skráðu þig inn eða búðu til aðgang" />
+            android:text="@string/skra_inn_eda_adgang" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
