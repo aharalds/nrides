@@ -1,8 +1,11 @@
 package is.hi.hopur16.nyttapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,7 +33,7 @@ public class DisplayListView extends AppCompatActivity {
         json_string = getIntent().getExtras().getString("json_data");
         try {
             String ridefrom,rideto,date,deptime,username,email,phone;
-            int cost,seatsavailable;
+            int cost,seatsavailable, id;
             jsonArray = new JSONArray(json_string);
             int count = 0;
             while (count < jsonArray.length()) {
@@ -44,9 +47,9 @@ public class DisplayListView extends AppCompatActivity {
                     username = JO.getString("username");
                     phone = JO.getString("phone");
                     email = JO.getString("email");
+                    id = JO.getInt("id");
 
-
-                    Ride ride = new Ride(ridefrom, rideto, date, deptime,seatsavailable,cost, username, phone, email);
+                    Ride ride = new Ride(id, ridefrom, rideto, date, deptime,seatsavailable,cost, username, phone, email);
                     rideAdapter.add(ride);
                     rides[count] = ride;
                     count++;
@@ -59,10 +62,18 @@ public class DisplayListView extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), RideInfoPopup.class);
-                intent.putExtra("info", rides[position]);
-                startActivity(intent);
-
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(DisplayListView.this);
+                String uName = preferences.getString("username", "");
+                Log.e("uName",  uName + " OG " + rides[position].getUsername());
+                if (uName.equalsIgnoreCase(rides[position].getUsername())) {
+                    Intent intent = new Intent(getApplicationContext(), RideEditPopup.class);
+                    intent.putExtra("info", rides[position]);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), RideInfoPopup.class);
+                    intent.putExtra("info", rides[position]);
+                    startActivity(intent);
+                }
             }
         });
 

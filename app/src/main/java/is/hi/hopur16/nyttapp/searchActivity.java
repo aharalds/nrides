@@ -43,7 +43,7 @@ import android.app.DatePickerDialog;
  * Created by atliharaldsson on 12/03/2018.
  */
 
-public class searchActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class searchActivity extends AppCompatActivity {
 
     private static final String ALLOWED_URI_CHARS = "@#&=*+-_.,:!?()/~'%ÁáÍíðÐþÞéÉÖÆæöúÚ";
     Ride[] rides;
@@ -91,7 +91,6 @@ public class searchActivity extends AppCompatActivity implements DatePickerDialo
                 }
             }
         });
-
         sendaBtn = (Button) findViewById(R.id.sendaBtn);
         sendaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,9 +98,7 @@ public class searchActivity extends AppCompatActivity implements DatePickerDialo
                 submitForm();
             }
         });
-
     }
-
 
     // Aðferð sem athugar hvort input frá notanda sé gilt
     public void submitForm() {
@@ -183,18 +180,6 @@ public class searchActivity extends AppCompatActivity implements DatePickerDialo
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDate = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(c.getTime());
-        dateTxt.setText(currentDate);
-
-    }
-
 
     private String readStream(InputStream in) {
         BufferedReader reader = null;
@@ -290,10 +275,6 @@ public class searchActivity extends AppCompatActivity implements DatePickerDialo
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             parseJSON(server_response);
-            //jsonString = server_response;
-            //Log.v("CatalogClient" , server_response);
-            //Gson gson = new Gson();
-            //rides = gson.fromJson(server_response, Ride[].class);
             Log.e("Response", "BOOM" + server_response);
 
         }

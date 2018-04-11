@@ -4,13 +4,14 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -33,10 +34,12 @@ public class DatePickerFragment extends android.support.v4.app.DialogFragment im
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();
+        SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDate = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(c.getTime());
+        String currentDate = format1.format(c.getTime());
+        Log.e("TAG", "FORMAT: " + currentDate);
         TextView dateTxt = (TextView) getActivity().findViewById(R.id.dateTxt);
         dateTxt.setText(currentDate);
     }

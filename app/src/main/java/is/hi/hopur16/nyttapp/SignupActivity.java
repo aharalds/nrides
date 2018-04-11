@@ -302,7 +302,6 @@ public class SignupActivity extends AppCompatActivity {
                 InputStream inputStream = urlConnection.getInputStream();
                 StringBuffer buffer = new StringBuffer();
                 if (inputStream == null) {
-                    Log.e("Firstnull", "inputStream == null");
                     return null;
                 }
                 reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -311,7 +310,6 @@ public class SignupActivity extends AppCompatActivity {
                 while ((inputLine = reader.readLine()) != null)
                     buffer.append(inputLine + "\n");
                 if (buffer.length() == 0) {
-                    Log.e("scndNull", "buffLength == null");
                     return null;
                 }
                 JsonResponse = buffer.toString();
@@ -337,7 +335,6 @@ public class SignupActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            Log.e("Response", " " + JsonResponse);
             try {
                 checkUnique(JsonResponse);
             } catch (JSONException e) {

@@ -11,6 +11,7 @@
     <android.support.v7.widget.FitWindowsFrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="30dp"
         >
 
         <TextView
@@ -42,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
+        android:paddingTop="40dp"
         >
 
         <ListView

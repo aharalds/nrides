@@ -18,6 +18,7 @@ public class Ride implements Serializable {
     public String deptime;
     public int seatsavailable;
     public int cost;
+    public int id;
 
     public String getRidefrom() {
         return ridefrom;
@@ -95,6 +96,13 @@ public class Ride implements Serializable {
         this.cost = cost;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    public int getId() {
+        return id;
+    }
+
     public Ride(String rideFrom, String rideTo, String date, String depTime, int seatsAvailable, int cost,
                 String username, String phone, String email) {
         this.username = username;
@@ -106,6 +114,20 @@ public class Ride implements Serializable {
         this.deptime = depTime;
         this.seatsavailable = seatsAvailable;
         this.cost = cost;
+    }
+
+    public Ride(int id, String rideFrom, String rideTo, String date, String depTime, int seatsAvailable, int cost,
+                String username, String phone, String email) {
+        this.username = username;
+        this.phone = phone;
+        this.email = email;
+        this.ridefrom = rideFrom;
+        this.rideto = rideTo;
+        this.date = date;
+        this.deptime = depTime;
+        this.seatsavailable = seatsAvailable;
+        this.cost = cost;
+        this.id = id;
     }
 
 }

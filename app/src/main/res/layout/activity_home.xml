@@ -41,12 +41,23 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="262dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginBottom="30dp"
         android:text="@string/add_ride_btn"
         app:layout_constraintBottom_toTopOf="@+id/searchRideBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/btn_myrides"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="262dp"
+        android:layout_height="52dp"
+        android:text="Mín för"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchRideBtn" />
 
     <Button
         android:id="@+id/btn_logout"
@@ -57,7 +68,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchRideBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_myrides" />
 
 
 

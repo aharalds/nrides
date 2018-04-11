@@ -3,8 +3,8 @@
     package="is.hi.hopur16.nyttapp">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="false"
@@ -25,12 +25,16 @@
         <activity android:name=".searchActivity" />
         <activity android:name=".DisplayListView" />
         <activity android:name=".RideAdapter" />
-       <activity android:name=".homeActivity"/>
+        <activity android:name=".homeActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
-        <activity android:name=".RideInfoPopup"
-            android:theme="@style/NoTitleDialog">
-        </activity>
+        <activity
+            android:name=".RideInfoPopup"
+            android:theme="@style/NoTitleDialog"></activity>
+        <activity
+            android:name=".RideEditPopup"
+            android:theme="@style/NoTitleDialog"></activity>
+        <activity android:name=".MyRidesActivity"></activity>
     </application>
 
 </manifest>
