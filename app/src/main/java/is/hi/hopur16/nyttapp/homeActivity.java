@@ -21,10 +21,12 @@ public class homeActivity extends AppCompatActivity  {
     TextView textView;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
 
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setTextColor(Color.parseColor("#000000"));

@@ -181,7 +181,7 @@ public class SignupActivity extends AppCompatActivity {
     // Aðferð sem athugar hvort símanúmerið sé gilt (a.m.k. 7 stafir og ekki tómt)
     private boolean checkPhone() {
         String phone = signupInputPhone.getText().toString().trim();
-        if (phone.isEmpty() || phone.length() < 7) {
+        if (phone.length() != 7) {
             signupInputLayoutPhone.setErrorEnabled(true);
             signupInputLayoutPhone.setError(getString(R.string.err_msg_phone));
             signupInputPhone.setError(getString(R.string.err_msg_required));
@@ -225,7 +225,6 @@ public class SignupActivity extends AppCompatActivity {
             String name = toJsonObj.getString("name");
             String phone = toJsonObj.getString("phone");
             String email = toJsonObj.getString("email");
-            User user = new User(uname, name, phone, email);
 
             clearPref(uname,name,phone,email);
 

@@ -46,7 +46,6 @@ public class DisplayListView extends AppCompatActivity {
                     email = JO.getString("email");
 
 
-
                     Ride ride = new Ride(ridefrom, rideto, date, deptime,seatsavailable,cost, username, phone, email);
                     rideAdapter.add(ride);
                     rides[count] = ride;

@@ -3,6 +3,7 @@ package is.hi.hopur16.nyttapp;
 import is.hi.hopur16.nyttapp.Ride;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,7 +43,7 @@ import java.util.Calendar;
 
 import static java.lang.Boolean.valueOf;
 
-public class rideActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class rideActivity extends AppCompatActivity {
 
     Ride ride;
 
@@ -99,6 +100,20 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
                 }
             }
         });
+
+        timeTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Initialize a new time picker dialog fragment
+                    DialogFragment dFragment = new TimePickerFragment();
+
+                    // Show the time picker dialog fragment
+                    dFragment.show(getSupportFragmentManager(),"Time Picker");
+                }
+            }
+        });
+
 
         sendaBtn = (Button) findViewById(R.id.sendaBtn);
         sendaBtn.setOnClickListener(new View.OnClickListener() {
@@ -274,7 +289,7 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
         }
     }
 
-
+/*
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();
@@ -284,7 +299,7 @@ public class rideActivity extends AppCompatActivity implements DatePickerDialog.
         String currentDate = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(c.getTime());
         dateTxt.setText(currentDate);
 
-    }
+    }*/
 
     public Ride createRide() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
