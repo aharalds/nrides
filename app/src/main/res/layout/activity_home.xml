@@ -1,82 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="is.hi.hopur16.nyttapp.rideActivity">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:stretchColumns="0,1"
+    tools:context="is.hi.hopur16.nyttapp.rideActivity" >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="336dp"
-        android:layout_height="130dp"
-        android:layout_marginBottom="48dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="62dp"
-        android:gravity="center"
-        android:text="@string/auglysa_leita"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/addRideBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dip">
 
-    <Button
-        android:id="@+id/searchRideBtn"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="262dp"
-        android:layout_height="52dp"
-        android:layout_marginBottom="131dp"
-        android:text="@string/search_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addRideBtn" />
+        <TextView
+            android:id="@+id/fyrirsogn"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_span="2"
+            android:gravity="center"
+            android:text="@string/fyrirsognHome"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-    <Button
-        android:id="@+id/addRideBtn"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="262dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="30dp"
-        android:text="@string/add_ride_btn"
-        app:layout_constraintBottom_toTopOf="@+id/searchRideBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dip">
+
+        <TextView
+            android:id="@+id/texti1"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/leitaAdFari"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <TextView
+            android:id="@+id/texti2"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/auglysaFar"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
+
+        <Button
+            android:id="@+id/searchRideBtn"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/search_btn" />
+
+        <Button
+            android:id="@+id/addRideBtn"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/add_ride_btn" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip">
+
+        <TextView
+            android:id="@+id/texti3"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/skodaFor"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <TextView
+            android:id="@+id/texti4"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/skraMigUt"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
 
     <Button
         android:id="@+id/btn_myrides"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="262dp"
-        android:layout_height="52dp"
-        android:text="Mín för"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchRideBtn" />
+        android:text="@string/minFor" />
 
-    <Button
-        android:id="@+id/btn_logout"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="262dp"
-        android:layout_height="52dp"
-        android:text="Skrá út"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_myrides" />
+        <Button
+            android:id="@+id/btn_logout"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/utskraning" />
+    </TableRow>
 
-
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
-
-</android.support.constraint.ConstraintLayout>
+</TableLayout>

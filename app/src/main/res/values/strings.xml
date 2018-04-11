@@ -29,7 +29,7 @@
     <string name="err_msg_phone">Vinsamlegast skráðu gilt símanúmer</string>
     <string name="bua_til_adgang">Ekki með aðgang? Búðu hann til!</string>
     <string name="notandanafn">Notandanafn</string>
-    <string name="auglysa_leita">Hvort viltu auglýsa farið þitt eða leita að lausu fari?</string>
+    <string name="auglysa_leita">Hér getur þú auglýst farið þitt eða leitað að lausu fari</string>
     <string name="err_msg_from">Vinsamlegast veldu brottfararstað</string>
     <string name="err_msg_to">Vinsamlegast veldu áfangastað</string>
     <string name="err_msg_seats">Vinsamlegast tilgreindu fjölda lausra sæta</string>
@@ -37,6 +37,15 @@
     <string name="err_msg_date">Vinsamlegast veldu dagsetningu</string>
     <string name="err_msg_time">Vinsamlegast skráðu gilda tímasetningu</string>
     <string name="err_msg_req">Nauðsynlegt að fylla út þennan reit</string>
+    <string name="skra_inn_eda_adgang">Skráðu þig inn eða búðu til aðgang</string>
+    <string name="velkomin">Velkomin/n á niceride!</string>
+    <string name="utskraning">Útskráning</string>
+    <string name="minFor">Mín för</string>
+    <string name="fyrirsognHome">Hvað viltu gera?</string>
+    <string name="leitaAdFari">Leita að lausu fari</string>
+    <string name="auglysaFar">Auglýsa farið mitt</string>
+    <string name="skodaFor">Skoða förin mín</string>
+    <string name="skraMigUt">Skrá mig út</string>
 
     <string-array name="places">
         <item>Reykjav&#237;k</item>

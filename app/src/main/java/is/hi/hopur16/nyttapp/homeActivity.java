@@ -44,7 +44,7 @@ public class homeActivity extends AppCompatActivity  {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         mName = preferences.getString("username", "");
 
-        TextView textView = (TextView) findViewById(R.id.textView);
+        TextView textView = (TextView) findViewById(R.id.fyrirsogn);
         textView.setTextColor(Color.parseColor("#000000"));
 
         myrideBtn = (Button) findViewById(R.id.btn_myrides);
