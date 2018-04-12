@@ -196,6 +196,10 @@ public class SignupActivity extends AppCompatActivity {
             signupInputLayoutPassword.setError(getString(R.string.err_msg_password));
             requestFocus(signupInputPassword);
             return false;
+        } else if (signupInputPassword.getText().toString().trim().length() < 8) {
+            signupInputLayoutPassword.setError(getString(R.string.err_msg_password1));
+            requestFocus(signupInputPassword);
+            return false;
         }
         signupInputLayoutPassword.setErrorEnabled(false);
         return true;

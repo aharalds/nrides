@@ -41,6 +41,7 @@ public class DatePickerFragment extends android.support.v4.app.DialogFragment im
         String currentDate = format1.format(c.getTime());
         Log.e("TAG", "FORMAT: " + currentDate);
         TextView dateTxt = (TextView) getActivity().findViewById(R.id.dateTxt);
+        dateTxt.setFocusable(false);
         dateTxt.setText(currentDate);
     }
 }

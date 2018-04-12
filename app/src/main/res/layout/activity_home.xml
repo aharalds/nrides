@@ -8,6 +8,13 @@
     android:stretchColumns="0,1"
     tools:context="is.hi.hopur16.nyttapp.rideActivity" >
 
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/nride"
+        android:layout_gravity="center"
+        android:layout_marginTop="56dp"/>
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,35 +22,15 @@
 
         <TextView
             android:id="@+id/fyrirsogn"
-            android:layout_marginBottom="40dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginBottom="60dp"
             android:layout_span="2"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:text="@string/fyrirsognHome"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
     </TableRow>
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dip">
 
-        <TextView
-            android:id="@+id/texti1"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="@string/leitaAdFari"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        <TextView
-            android:id="@+id/texti2"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="@string/auglysaFar"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-    </TableRow>
 
     <TableRow
         android:layout_width="wrap_content"
@@ -52,60 +39,61 @@
 
         <Button
             android:id="@+id/searchRideBtn"
-            style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/butns"
             android:text="@string/search_btn" />
 
         <Button
             android:id="@+id/addRideBtn"
-            style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/butns"
+            android:layout_marginBottom="10dp"
             android:text="@string/add_ride_btn" />
 
     </TableRow>
 
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dip">
 
-        <TextView
-            android:id="@+id/texti3"
-            android:gravity="center"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/skodaFor"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        <TextView
-            android:id="@+id/texti4"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:text="@string/skraMigUt"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-    </TableRow>
 
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dip" >
 
-    <Button
-        android:id="@+id/btn_myrides"
-        style="@style/Widget.AppCompat.Button"
-        android:text="@string/minFor" />
+        <Button
+            android:id="@+id/btn_myrides"
+            android:background="@drawable/butns"
+            android:text="@string/minFor"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="10dp"/>
 
         <Button
             android:id="@+id/btn_logout"
-            style="@style/Widget.AppCompat.Button"
+            android:background="@drawable/butns"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="10dp"
             android:text="@string/utskraning" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dip">
+
+        <TextView
+            android:id="@+id/log_msg"
+            android:textAllCaps="true"
+            android:layout_span="2"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/colorGray"
+            android:text="Skráður inn sem " />
+
     </TableRow>
 
 </TableLayout>

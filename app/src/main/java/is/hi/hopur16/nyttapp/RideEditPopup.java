@@ -74,6 +74,8 @@ public class RideEditPopup extends AppCompatActivity {
                 pos = Integer.valueOf(newSeats);
                 if(pos != ride.getSeatsavailable()) {
                     jsonUpdate(ride.getId(),pos);
+                } else {
+                    Toast.makeText(getApplicationContext(),"Vinsamlegast veldu annan sætafjölda" ,Toast.LENGTH_SHORT).show();
                 }
             }
         });

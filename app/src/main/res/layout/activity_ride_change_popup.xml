@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/driver"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:textSize="25dp"
             android:textStyle="bold"
@@ -29,8 +29,10 @@
             android:id="@+id/btnDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
             android:layout_gravity="center"
             android:text="Eyða Auglýsingu"
+            android:background="@drawable/butns"
             android:layout_marginBottom="30dp"/>
 
         <TextView
@@ -55,13 +57,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@android:drawable/btn_dropdown"
+            android:layout_marginRight="10dp"
+            android:paddingVertical="10dp"
+            android:background="@android:drawable/editbox_dropdown_light_frame"
             android:spinnerMode="dropdown"/>
         <Button
             android:id="@+id/btnCommit"
             android:text="Breyta"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:background="@drawable/butns"
+            android:layout_height="60dp" />
         </LinearLayout>
     </LinearLayout>
 

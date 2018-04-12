@@ -68,7 +68,7 @@
                 android:adjustViewBounds="true"
                 android:background="#FFFFFF"
                 android:scaleType="fitXY"
-                android:src="@drawable/call"
+                android:src="@drawable/ic_phone"
 
                 />
 
@@ -81,7 +81,7 @@
                 android:adjustViewBounds="true"
                 android:background="#FFFFFF"
                 android:scaleType="fitXY"
-                android:src="@drawable/sms" />
+                android:src="@drawable/ic_sms" />
 
             <ImageButton
                 android:id="@+id/btn_email"
@@ -91,7 +91,7 @@
                 android:adjustViewBounds="true"
                 android:background="#FFFFFF"
                 android:scaleType="fitXY"
-                android:src="@drawable/mail" />
+                android:src="@drawable/ic_email" />
 
         </LinearLayout>
         <LinearLayout

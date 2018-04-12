@@ -85,6 +85,7 @@
             android:layout_marginBottom="24dp"
             android:layout_marginTop="24dp"
             tools:layout_editor_absoluteX="90dp"
+            android:background="@drawable/butns"
             tools:layout_editor_absoluteY="463dp" />
 
         <!--

@@ -26,6 +26,7 @@
     <string name="err_msg_required">Nauðsynlegt að fylla út rétt gildi</string>
     <string name="err_msg_email">Vinsamlegast skráðu gilt netfang</string>
     <string name="err_msg_password">Veldu lykilorð</string>
+    <string name="err_msg_password1">Lykilorð a.m.k. 8 stafir</string>
     <string name="err_msg_phone">Vinsamlegast skráðu gilt símanúmer</string>
     <string name="bua_til_adgang">Ekki með aðgang? Búðu hann til!</string>
     <string name="notandanafn">Notandanafn</string>
@@ -38,10 +39,10 @@
     <string name="err_msg_time">Vinsamlegast skráðu gilda tímasetningu</string>
     <string name="err_msg_req">Nauðsynlegt að fylla út þennan reit</string>
     <string name="skra_inn_eda_adgang">Skráðu þig inn eða búðu til aðgang</string>
-    <string name="velkomin">Velkomin/n á niceride!</string>
+    <string name="velkomin">Velkomin/n</string>
     <string name="utskraning">Útskráning</string>
     <string name="minFor">Mín för</string>
-    <string name="fyrirsognHome">Hvað viltu gera?</string>
+    <string name="fyrirsognHome">Ferðast með félagsskap!</string>
     <string name="leitaAdFari">Leita að lausu fari</string>
     <string name="auglysaFar">Auglýsa farið mitt</string>
     <string name="skodaFor">Skoða förin mín</string>

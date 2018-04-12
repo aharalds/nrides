@@ -152,6 +152,7 @@
             android:layout_marginBottom="24dp"
             android:layout_marginTop="24dp"
             app:layout_constraintBaseline_toBaselineOf="@+id/timeTxt"
+            android:background="@drawable/butns"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

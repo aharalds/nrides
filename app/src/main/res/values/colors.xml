@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorW">#284986ff</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">@color/backhound2</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="backhound">#1b1c1cff</color>
+    <color name="backhound2">#5f1c1cff</color>
+    <color name="colorGray">#8e8e8e</color>
+    <color name="lightGray">#d4d4d4</color>
 </resources>

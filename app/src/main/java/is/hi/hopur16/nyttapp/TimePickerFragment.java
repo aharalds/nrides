@@ -38,5 +38,6 @@ public class TimePickerFragment extends android.support.v4.app.DialogFragment im
             hourString = String.valueOf(hourOfDay);
         }
         timeTxt.setText(hourString + ":" + minuteString);
+        timeTxt.setFocusable(false);
     }
 }

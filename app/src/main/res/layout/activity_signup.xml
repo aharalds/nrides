@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -66,6 +66,7 @@
 
             <EditText
                 android:id="@+id/phone"
+                android:maxLength="7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -93,8 +94,9 @@
             android:id="@+id/btn_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginTop="24dp"
+            android:background="@drawable/butns"
             android:padding="12dp"
             android:text="@string/register" />
 
@@ -104,6 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login_link"
+
             android:textAppearance="@style/TextAppearance.AppCompat" />
 
     </LinearLayout>

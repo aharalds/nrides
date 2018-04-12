@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,6 +45,9 @@ public class homeActivity extends AppCompatActivity  {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         mName = preferences.getString("username", "");
+
+        TextView subhead = (TextView) findViewById(R.id.log_msg);
+        subhead.setText("innskráður, " + mName);
 
         TextView textView = (TextView) findViewById(R.id.fyrirsogn);
         textView.setTextColor(Color.parseColor("#000000"));
