@@ -88,6 +88,10 @@ public class homeActivity extends AppCompatActivity  {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     public void checkLog() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();

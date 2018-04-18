@@ -49,7 +49,7 @@ public class DisplayRideActivity extends AppCompatActivity  {
         seatsTxt.setText("Laus sæti: " + String.valueOf(ride.getSeatsavailable()));
         dateTxt.setText(ride.getDate());
         timeTxt.setText(ride.getDeptime());
-
-
     }
 }
+
+
